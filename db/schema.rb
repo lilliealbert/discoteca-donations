@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_26_021429) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_26_032756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,6 +25,22 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_26_021429) do
     t.index ["donor_id"], name: "index_donation_requests_on_donor_id"
     t.index ["event_id"], name: "index_donation_requests_on_event_id"
     t.index ["volunteer_id"], name: "index_donation_requests_on_volunteer_id"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "donation_type"
+    t.bigint "donor_id", null: false
+    t.bigint "event_id", null: false
+    t.text "fine_print"
+    t.boolean "in_hand"
+    t.text "notes"
+    t.text "short_description"
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_id", null: false
+    t.index ["donor_id"], name: "index_donations_on_donor_id"
+    t.index ["event_id"], name: "index_donations_on_event_id"
+    t.index ["volunteer_id"], name: "index_donations_on_volunteer_id"
   end
 
   create_table "donors", force: :cascade do |t|
@@ -61,4 +77,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_26_021429) do
   add_foreign_key "donation_requests", "donors"
   add_foreign_key "donation_requests", "events"
   add_foreign_key "donation_requests", "volunteers"
+  add_foreign_key "donations", "donors"
+  add_foreign_key "donations", "events"
+  add_foreign_key "donations", "volunteers"
 end

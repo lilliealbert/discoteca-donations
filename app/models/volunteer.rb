@@ -5,4 +5,5 @@ class Volunteer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :donation_requests, dependent: :destroy
+  has_many :donations, dependent: :destroy
 end
