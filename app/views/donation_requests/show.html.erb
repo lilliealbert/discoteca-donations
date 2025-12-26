@@ -1,0 +1,85 @@
+<div class="min-h-screen">
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <nav class="mb-8">
+      <%= link_to event_path(@donation_request.event), class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to <%= @donation_request.event.name %>
+      <% end %>
+    </nav>
+
+    <% if notice.present? %>
+      <div class="mb-6 rounded-lg bg-green-50 p-4 border border-green-200">
+        <p class="text-sm font-medium text-green-800"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8 sm:flex sm:items-center sm:justify-between">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900">Donation Request</h1>
+          <p class="mt-2 text-base text-gray-600">
+            <%= @donation_request.donor.name %> for <%= @donation_request.event.name %>
+          </p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+          <%= link_to edit_donation_request_path(@donation_request), class: "inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors" do %>
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+            </svg>
+            Edit
+          <% end %>
+        </div>
+      </header>
+
+      <dl class="divide-y divide-gray-100">
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Donor</dt>
+          <dd class="mt-1 text-sm sm:col-span-2 sm:mt-0">
+            <%= link_to @donation_request.donor.name, donor_path(@donation_request.donor), class: "text-indigo-600 hover:text-indigo-500" %>
+          </dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Event</dt>
+          <dd class="mt-1 text-sm sm:col-span-2 sm:mt-0">
+            <%= link_to @donation_request.event.name, event_path(@donation_request.event), class: "text-indigo-600 hover:text-indigo-500" %>
+          </dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Volunteer</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.volunteer.email %></dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Status</dt>
+          <dd class="mt-1 sm:col-span-2 sm:mt-0">
+            <% status_classes = case @donation_request.request_status
+               when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
+               when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
+               when 'asked_twice' then 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+               when 'asked_thrice' then 'bg-orange-50 text-orange-700 ring-orange-600/20'
+               when 'no' then 'bg-red-50 text-red-700 ring-red-600/20'
+               when 'yes' then 'bg-green-50 text-green-700 ring-green-600/20'
+               else 'bg-gray-50 text-gray-600 ring-gray-500/10'
+               end %>
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+              <%= @donation_request.request_status&.humanize || 'Unknown' %>
+            </span>
+          </dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Notes</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 whitespace-pre-wrap"><%= @donation_request.notes.presence || "No notes" %></dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Created</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.created_at.strftime("%B %d, %Y at %l:%M %p") %></dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Last updated</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.updated_at.strftime("%B %d, %Y at %l:%M %p") %></dd>
+        </div>
+      </dl>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="min-h-screen">
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <nav class="mb-8">
+      <%= link_to donation_request_path(@donation_request), class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Cancel
+      <% end %>
+    </nav>
+
+    <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Edit Donation Request</h1>
+        <p class="mt-2 text-base text-gray-600">
+          <%= @donation_request.donor.name %> for <%= @donation_request.event.name %>
+        </p>
+      </header>
+
+      <%= form_with model: @donation_request, class: "divide-y divide-gray-100" do |form| %>
+        <% if @donation_request.errors.any? %>
+          <div class="px-6 py-5">
+            <div class="rounded-lg bg-red-50 p-4 border border-red-200">
+              <h3 class="text-sm font-medium text-red-800">
+                <%= pluralize(@donation_request.errors.count, "error") %> prohibited this donation request from being saved:
+              </h3>
+              <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+                <% @donation_request.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <dt class="text-sm font-medium text-gray-500">Donor</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.donor.name %></dd>
+        </div>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <dt class="text-sm font-medium text-gray-500">Event</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.event.name %></dd>
+        </div>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <dt class="text-sm font-medium text-gray-500">Volunteer</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation_request.volunteer.email %></dd>
+        </div>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <%= form.label :request_status, "Status", class: "text-sm font-medium text-gray-500" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= form.select :request_status,
+                DonationRequest.request_statuses.keys.map { |s| [s.humanize, s] },
+                {},
+                class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+          </div>
+        </div>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <%= form.label :notes, class: "text-sm font-medium text-gray-500" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= form.text_area :notes,
+                rows: 4,
+                class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+                placeholder: "Add any notes about this donation request..." %>
+          </div>
+        </div>
+
+        <div class="px-6 py-5 flex items-center justify-end gap-3">
+          <%= link_to "Cancel", donation_request_path(@donation_request), class: "rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" %>
+          <%= form.submit "Save changes", class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
+        </div>
+      <% end %>
+    </article>
+  </div>
+</div>
