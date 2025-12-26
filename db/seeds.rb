@@ -1,5 +1,6 @@
 # Clear existing data
 puts "Clearing existing data..."
+Donation.destroy_all
 DonationRequest.destroy_all
 Donor.destroy_all
 Event.destroy_all
@@ -159,10 +160,121 @@ donation_requests.each do |attrs|
   DonationRequest.create!(attrs)
 end
 
+# Create Donations
+puts "Creating donations..."
+
+donations = [
+  {
+    donor: donors[0], # Greg Universe
+    volunteer: volunteers[0],
+    event: events[0], # Beach City Concert
+    donation_type: :physical,
+    in_hand: true,
+    short_description: "Professional sound system and amplifiers",
+    notes: "Full PA system including speakers, mixing board, and microphones. Greg will set it up himself.",
+    fine_print: "Equipment must be returned in same condition. Greg needs access to venue 3 hours before event."
+  },
+  {
+    donor: donors[0], # Greg Universe
+    volunteer: volunteers[0],
+    event: events[4], # Sadie Killer Benefit
+    donation_type: :other,
+    in_hand: false,
+    short_description: "Opening musical performance",
+    notes: "Greg will perform a 20-minute acoustic set of his classic hits.",
+    fine_print: nil
+  },
+  {
+    donor: donors[1], # Sadie Miller
+    volunteer: volunteers[2],
+    event: events[0], # Beach City Concert
+    donation_type: :other,
+    in_hand: false,
+    short_description: "Headline performance by Sadie Killer & The Suspects",
+    notes: "Full band performance, approximately 45 minutes.",
+    fine_print: "Band needs green room with snacks. No brown M&Ms (just kidding)."
+  },
+  {
+    donor: donors[3], # Kofi Pizza
+    volunteer: volunteers[0],
+    event: events[6], # Fish Stew Pizza Community Dinner
+    donation_type: :physical,
+    in_hand: false,
+    short_description: "100 pizzas for community dinner",
+    notes: "Assorted pizzas including veggie options. Will be delivered hot.",
+    fine_print: "24-hour notice required for order. Delivery included within Beach City limits."
+  },
+  {
+    donor: donors[8], # Mr. Fryman
+    volunteer: volunteers[0],
+    event: events[3], # Big Donut Charity Drive
+    donation_type: :physical,
+    in_hand: true,
+    short_description: "Fry bits and beverages",
+    notes: "5 large containers of fry bits plus lemonade for 50 people.",
+    fine_print: nil
+  },
+  {
+    donor: donors[11], # Dr. Maheswaran
+    volunteer: volunteers[3],
+    event: events[3], # Big Donut Charity Drive
+    donation_type: :physical,
+    in_hand: true,
+    short_description: "First aid supplies kit",
+    notes: "Professional-grade first aid kit with bandages, antiseptic, and basic medical supplies.",
+    fine_print: "For minor injuries only. Call 911 for emergencies."
+  },
+  {
+    donor: donors[5], # Vidalia
+    volunteer: volunteers[4],
+    event: events[1], # Crystal Gem Gala
+    donation_type: :physical,
+    in_hand: false,
+    short_description: "Original painting for silent auction",
+    notes: "Large canvas painting of Beach City sunset. Estimated value $500.",
+    fine_print: "Painting is unframed. Winner responsible for framing and pickup."
+  },
+  {
+    donor: donors[2], # Lars
+    volunteer: volunteers[3],
+    event: events[1], # Crystal Gem Gala
+    donation_type: :physical,
+    in_hand: false,
+    short_description: "Gourmet space pastry assortment",
+    notes: "50 assorted pastries from Spacetries bakery. Includes ube rolls and star cookies.",
+    fine_print: "Must be consumed within 24 hours. Contains gluten and dairy."
+  },
+  {
+    donor: donors[6], # Jamie
+    volunteer: volunteers[5],
+    event: events[4], # Sadie Killer Benefit
+    donation_type: :other,
+    in_hand: false,
+    short_description: "MC and event hosting services",
+    notes: "Jamie will serve as Master of Ceremonies for the entire benefit show.",
+    fine_print: "May include dramatic monologues between acts."
+  },
+  {
+    donor: donors[4], # Mayor Nanefua
+    volunteer: volunteers[1],
+    event: events[5], # Beach City Pride
+    donation_type: :digital,
+    in_hand: true,
+    short_description: "City permit fee waiver",
+    notes: "Official waiver of all permit fees for the Pride Parade route.",
+    fine_print: "Standard parade route only. Additional streets require separate approval."
+  }
+]
+
+donations.each do |attrs|
+  Donation.create!(attrs)
+end
+
 puts "Seed complete!"
 puts "  - #{Volunteer.count} volunteers"
 puts "  - #{Event.count} events"
 puts "  - #{Donor.count} donors"
 puts "  - #{DonationRequest.count} donation requests"
+puts "  - #{Donation.count} donations"
 puts ""
 puts "You can log in with any volunteer email (e.g., steven@crystalgems.com) with password: password123"

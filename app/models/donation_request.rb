@@ -3,6 +3,8 @@ class DonationRequest < ApplicationRecord
   belongs_to :volunteer
   belongs_to :event
 
+  after_save :create_donation, if: :became_accepted?
+
   enum :request_status, {
     unasked: "unasked",
     asked_once: "asked_once",
@@ -11,4 +13,19 @@ class DonationRequest < ApplicationRecord
     no: "no",
     yes: "yes"
   }
+
+  private
+
+  def became_accepted?
+    saved_change_to_request_status? && yes?
+  end
+
+  def create_donation
+    Donation.create!(
+      donor: donor,
+      volunteer: volunteer,
+      event: event,
+      in_hand: false
+    )
+  end
 end
