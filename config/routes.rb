@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :volunteers
   resources :events, only: [:index, :show]
   resources :donors, only: [:index, :show]
+  resources :volunteers, only: [:index, :show]
   resources :donation_requests, only: [:show, :edit, :update]
   resources :donations, only: [:show, :edit, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

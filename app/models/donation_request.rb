@@ -2,6 +2,7 @@ class DonationRequest < ApplicationRecord
   belongs_to :donor
   belongs_to :volunteer
   belongs_to :event
+  has_one :donation
 
   after_save :create_donation, if: :became_accepted?
 
@@ -22,6 +23,7 @@ class DonationRequest < ApplicationRecord
 
   def create_donation
     Donation.create!(
+      donation_request: self,
       donor: donor,
       volunteer: volunteer,
       event: event,

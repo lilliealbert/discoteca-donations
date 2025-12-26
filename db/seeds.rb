@@ -136,138 +136,76 @@ donors = [
   Donor.create!(attrs)
 end
 
-# Create Donation Requests
+# Create Donation Requests (initially not "yes" - we'll update them to trigger the callback)
 puts "Creating donation requests..."
 
-donation_requests = [
-  { donor: donors[0], volunteer: volunteers[0], event: events[0], request_status: :yes, notes: "Greg is donating his sound equipment for the concert!" },
-  { donor: donors[1], volunteer: volunteers[2], event: events[0], request_status: :yes, notes: "Sadie will perform a set with her band." },
-  { donor: donors[2], volunteer: volunteers[3], event: events[1], request_status: :asked_once, notes: "Reached out about pastry donations for the gala." },
-  { donor: donors[3], volunteer: volunteers[0], event: events[6], request_status: :yes, notes: "Kofi is providing all the pizza for the community dinner!" },
-  { donor: donors[4], volunteer: volunteers[1], event: events[5], request_status: :asked_twice, notes: "Mayor Nanefua will give opening remarks and city support." },
-  { donor: donors[5], volunteer: volunteers[4], event: events[1], request_status: :unasked, notes: "Planning to ask about donating artwork for silent auction." },
-  { donor: donors[6], volunteer: volunteers[5], event: events[4], request_status: :yes, notes: "Jamie volunteered to MC the benefit show." },
+# Requests that will NOT become donations
+pending_requests = [
   { donor: donors[7], volunteer: volunteers[2], event: events[2], request_status: :no, notes: "Ronaldo wanted to give a 3-hour presentation. We politely declined." },
-  { donor: donors[8], volunteer: volunteers[0], event: events[3], request_status: :yes, notes: "Donating fry bits for the charity drive snack table." },
   { donor: donors[9], volunteer: volunteers[1], event: events[4], request_status: :asked_once, notes: "Barb offered to help with logistics." },
   { donor: donors[10], volunteer: volunteers[0], event: events[2], request_status: :asked_thrice, notes: "Connie will help organize the Little Homeschool event." },
-  { donor: donors[11], volunteer: volunteers[3], event: events[3], request_status: :yes, notes: "Dr. Maheswaran donating first aid kits." },
-  { donor: donors[0], volunteer: volunteers[0], event: events[4], request_status: :asked_twice, notes: "Greg offering to open for Sadie Killer." },
   { donor: donors[3], volunteer: volunteers[2], event: events[0], request_status: :unasked, notes: "Need to follow up about food truck at concert." }
 ]
 
-donation_requests.each do |attrs|
+pending_requests.each do |attrs|
   DonationRequest.create!(attrs)
 end
 
-# Create Donations
-puts "Creating donations..."
+# Requests that WILL become donations (with additional donation details)
+puts "Creating donation requests that will generate donations..."
 
-donations = [
+accepted_requests = [
   {
-    donor: donors[0], # Greg Universe
-    volunteer: volunteers[0],
-    event: events[0], # Beach City Concert
-    donation_type: :physical,
-    in_hand: true,
-    short_description: "Professional sound system and amplifiers",
-    notes: "Full PA system including speakers, mixing board, and microphones. Greg will set it up himself.",
-    fine_print: "Equipment must be returned in same condition. Greg needs access to venue 3 hours before event."
+    request: { donor: donors[0], volunteer: volunteers[0], event: events[0], notes: "Greg is donating his sound equipment for the concert!" },
+    donation: { donation_type: :physical, in_hand: true, short_description: "Professional sound system and amplifiers", notes: "Full PA system including speakers, mixing board, and microphones. Greg will set it up himself.", fine_print: "Equipment must be returned in same condition. Greg needs access to venue 3 hours before event." }
   },
   {
-    donor: donors[0], # Greg Universe
-    volunteer: volunteers[0],
-    event: events[4], # Sadie Killer Benefit
-    donation_type: :other,
-    in_hand: false,
-    short_description: "Opening musical performance",
-    notes: "Greg will perform a 20-minute acoustic set of his classic hits.",
-    fine_print: nil
+    request: { donor: donors[1], volunteer: volunteers[2], event: events[0], notes: "Sadie will perform a set with her band." },
+    donation: { donation_type: :other, in_hand: false, short_description: "Headline performance by Sadie Killer & The Suspects", notes: "Full band performance, approximately 45 minutes.", fine_print: "Band needs green room with snacks. No brown M&Ms (just kidding)." }
   },
   {
-    donor: donors[1], # Sadie Miller
-    volunteer: volunteers[2],
-    event: events[0], # Beach City Concert
-    donation_type: :other,
-    in_hand: false,
-    short_description: "Headline performance by Sadie Killer & The Suspects",
-    notes: "Full band performance, approximately 45 minutes.",
-    fine_print: "Band needs green room with snacks. No brown M&Ms (just kidding)."
+    request: { donor: donors[2], volunteer: volunteers[3], event: events[1], notes: "Reached out about pastry donations for the gala." },
+    donation: { donation_type: :physical, in_hand: false, short_description: "Gourmet space pastry assortment", notes: "50 assorted pastries from Spacetries bakery. Includes ube rolls and star cookies.", fine_print: "Must be consumed within 24 hours. Contains gluten and dairy." }
   },
   {
-    donor: donors[3], # Kofi Pizza
-    volunteer: volunteers[0],
-    event: events[6], # Fish Stew Pizza Community Dinner
-    donation_type: :physical,
-    in_hand: false,
-    short_description: "100 pizzas for community dinner",
-    notes: "Assorted pizzas including veggie options. Will be delivered hot.",
-    fine_print: "24-hour notice required for order. Delivery included within Beach City limits."
+    request: { donor: donors[3], volunteer: volunteers[0], event: events[6], notes: "Kofi is providing all the pizza for the community dinner!" },
+    donation: { donation_type: :physical, in_hand: false, short_description: "100 pizzas for community dinner", notes: "Assorted pizzas including veggie options. Will be delivered hot.", fine_print: "24-hour notice required for order. Delivery included within Beach City limits." }
   },
   {
-    donor: donors[8], # Mr. Fryman
-    volunteer: volunteers[0],
-    event: events[3], # Big Donut Charity Drive
-    donation_type: :physical,
-    in_hand: true,
-    short_description: "Fry bits and beverages",
-    notes: "5 large containers of fry bits plus lemonade for 50 people.",
-    fine_print: nil
+    request: { donor: donors[4], volunteer: volunteers[1], event: events[5], notes: "Mayor Nanefua will give opening remarks and city support." },
+    donation: { donation_type: :digital, in_hand: true, short_description: "City permit fee waiver", notes: "Official waiver of all permit fees for the Pride Parade route.", fine_print: "Standard parade route only. Additional streets require separate approval." }
   },
   {
-    donor: donors[11], # Dr. Maheswaran
-    volunteer: volunteers[3],
-    event: events[3], # Big Donut Charity Drive
-    donation_type: :physical,
-    in_hand: true,
-    short_description: "First aid supplies kit",
-    notes: "Professional-grade first aid kit with bandages, antiseptic, and basic medical supplies.",
-    fine_print: "For minor injuries only. Call 911 for emergencies."
+    request: { donor: donors[5], volunteer: volunteers[4], event: events[1], notes: "Planning to ask about donating artwork for silent auction." },
+    donation: { donation_type: :physical, in_hand: false, short_description: "Original painting for silent auction", notes: "Large canvas painting of Beach City sunset. Estimated value $500.", fine_print: "Painting is unframed. Winner responsible for framing and pickup." }
   },
   {
-    donor: donors[5], # Vidalia
-    volunteer: volunteers[4],
-    event: events[1], # Crystal Gem Gala
-    donation_type: :physical,
-    in_hand: false,
-    short_description: "Original painting for silent auction",
-    notes: "Large canvas painting of Beach City sunset. Estimated value $500.",
-    fine_print: "Painting is unframed. Winner responsible for framing and pickup."
+    request: { donor: donors[6], volunteer: volunteers[5], event: events[4], notes: "Jamie volunteered to MC the benefit show." },
+    donation: { donation_type: :other, in_hand: false, short_description: "MC and event hosting services", notes: "Jamie will serve as Master of Ceremonies for the entire benefit show.", fine_print: "May include dramatic monologues between acts." }
   },
   {
-    donor: donors[2], # Lars
-    volunteer: volunteers[3],
-    event: events[1], # Crystal Gem Gala
-    donation_type: :physical,
-    in_hand: false,
-    short_description: "Gourmet space pastry assortment",
-    notes: "50 assorted pastries from Spacetries bakery. Includes ube rolls and star cookies.",
-    fine_print: "Must be consumed within 24 hours. Contains gluten and dairy."
+    request: { donor: donors[8], volunteer: volunteers[0], event: events[3], notes: "Donating fry bits for the charity drive snack table." },
+    donation: { donation_type: :physical, in_hand: true, short_description: "Fry bits and beverages", notes: "5 large containers of fry bits plus lemonade for 50 people.", fine_print: nil }
   },
   {
-    donor: donors[6], # Jamie
-    volunteer: volunteers[5],
-    event: events[4], # Sadie Killer Benefit
-    donation_type: :other,
-    in_hand: false,
-    short_description: "MC and event hosting services",
-    notes: "Jamie will serve as Master of Ceremonies for the entire benefit show.",
-    fine_print: "May include dramatic monologues between acts."
+    request: { donor: donors[11], volunteer: volunteers[3], event: events[3], notes: "Dr. Maheswaran donating first aid kits." },
+    donation: { donation_type: :physical, in_hand: true, short_description: "First aid supplies kit", notes: "Professional-grade first aid kit with bandages, antiseptic, and basic medical supplies.", fine_print: "For minor injuries only. Call 911 for emergencies." }
   },
   {
-    donor: donors[4], # Mayor Nanefua
-    volunteer: volunteers[1],
-    event: events[5], # Beach City Pride
-    donation_type: :digital,
-    in_hand: true,
-    short_description: "City permit fee waiver",
-    notes: "Official waiver of all permit fees for the Pride Parade route.",
-    fine_print: "Standard parade route only. Additional streets require separate approval."
+    request: { donor: donors[0], volunteer: volunteers[0], event: events[4], notes: "Greg offering to open for Sadie Killer." },
+    donation: { donation_type: :other, in_hand: false, short_description: "Opening musical performance", notes: "Greg will perform a 20-minute acoustic set of his classic hits.", fine_print: nil }
   }
 ]
 
-donations.each do |attrs|
-  Donation.create!(attrs)
+accepted_requests.each do |data|
+  # Create the request (callback won't fire since status isn't "yes" yet)
+  request = DonationRequest.create!(data[:request].merge(request_status: :asked_once))
+
+  # Update to "yes" - this triggers the callback to create a donation
+  request.update!(request_status: :yes)
+
+  # Update the associated donation with additional details
+  request.donation.update!(data[:donation])
 end
 
 puts "Seed complete!"
