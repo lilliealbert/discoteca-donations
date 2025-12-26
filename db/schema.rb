@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_26_015221) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_26_021429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "donation_requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "donor_id", null: false
+    t.bigint "event_id", null: false
+    t.text "notes"
+    t.string "request_status", default: "unasked"
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_id", null: false
+    t.index ["donor_id"], name: "index_donation_requests_on_donor_id"
+    t.index ["event_id"], name: "index_donation_requests_on_event_id"
+    t.index ["volunteer_id"], name: "index_donation_requests_on_volunteer_id"
+  end
 
   create_table "donors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -44,4 +57,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_26_015221) do
     t.index ["email"], name: "index_volunteers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_volunteers_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "donation_requests", "donors"
+  add_foreign_key "donation_requests", "events"
+  add_foreign_key "donation_requests", "volunteers"
 end

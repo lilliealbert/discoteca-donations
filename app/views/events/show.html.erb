@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <nav class="mb-8">
       <%= link_to events_path, class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -38,5 +38,77 @@
         </div>
       </dl>
     </article>
+
+    <section class="mt-10">
+      <header class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">Donation Requests</h2>
+        <p class="mt-1 text-sm text-gray-500">All donation requests for this event</p>
+      </header>
+
+      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <table class="min-w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50/75">
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Donor
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                :wq
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Status
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Notes
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @donation_requests.any? %>
+              <% @donation_requests.each_with_index do |request, index| %>
+                <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
+                  <td class="py-5 pl-6 pr-3">
+                    <%= link_to donor_path(request.donor), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" do %>
+                      <%= request.donor.name %>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="text-sm text-gray-600"><%= request.volunteer.email %></span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <% status_classes = case request.request_status
+                       when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
+                       when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
+                       when 'asked_twice' then 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+                       when 'asked_thrice' then 'bg-orange-50 text-orange-700 ring-orange-600/20'
+                       when 'no' then 'bg-red-50 text-red-700 ring-red-600/20'
+                       when 'yes' then 'bg-green-50 text-green-700 ring-green-600/20'
+                       else 'bg-gray-50 text-gray-600 ring-gray-500/10'
+                       end %>
+                    <% status_label = request.request_status&.humanize || 'Unknown' %>
+                    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+                      <%= status_label %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="4" class="px-6 py-16 text-center">
+                  <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                  </svg>
+                  <h3 class="mt-4 text-sm font-semibold text-gray-900">No donation requests</h3>
+                  <p class="mt-1 text-sm text-gray-500">No donation requests have been created for this event yet.</p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 </div>

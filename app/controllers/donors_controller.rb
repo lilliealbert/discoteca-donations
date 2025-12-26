@@ -5,5 +5,6 @@ class DonorsController < ApplicationController
 
   def show
     @donor = Donor.find(params[:id])
+    @donation_requests = @donor.donation_requests.includes(:event, :volunteer)
   end
 end
