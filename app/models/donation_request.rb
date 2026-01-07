@@ -1,6 +1,6 @@
 class DonationRequest < ApplicationRecord
   belongs_to :donor
-  belongs_to :volunteer
+  belongs_to :volunteer, optional: true
   belongs_to :event
   has_one :donation
 

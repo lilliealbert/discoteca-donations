@@ -41,6 +41,78 @@
 
     <section class="mt-10">
       <header class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests</h2>
+        <p class="mt-1 text-sm text-gray-500">Donation requests not yet assigned to a volunteer</p>
+      </header>
+
+      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <table class="min-w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50/75">
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Donor
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Status
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Notes
+              </th>
+              <th scope="col" class="relative py-4 pl-3 pr-6">
+                <span class="sr-only">View</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @unclaimed_requests.any? %>
+              <% @unclaimed_requests.each_with_index do |request, index| %>
+                <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
+                  <td class="py-5 pl-6 pr-3">
+                    <%= link_to donor_path(request.donor), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" do %>
+                      <%= request.donor.name %>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-5">
+                    <% status_classes = case request.request_status
+                       when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
+                       when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
+                       when 'asked_twice' then 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+                       when 'asked_thrice' then 'bg-orange-50 text-orange-700 ring-orange-600/20'
+                       else 'bg-gray-50 text-gray-600 ring-gray-500/10'
+                       end %>
+                    <% status_label = request.request_status&.humanize || 'Unknown' %>
+                    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+                      <%= status_label %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
+                  </td>
+                  <td class="py-5 pr-6 text-right">
+                    <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                      View<span class="sr-only">, <%= request.donor.name %></span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="4" class="px-6 py-16 text-center">
+                  <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h3 class="mt-4 text-sm font-semibold text-gray-900">No unclaimed requests</h3>
+                  <p class="mt-1 text-sm text-gray-500">All donation requests have been assigned to volunteers.</p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <header class="mb-6">
         <h2 class="text-xl font-semibold text-gray-900">Pending Requests</h2>
         <p class="mt-1 text-sm text-gray-500">Donation requests awaiting response</p>
       </header>
@@ -245,7 +317,7 @@
                     <% end %>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-sm text-gray-600"><%= request.volunteer.email %></span>
+                    <span class="text-sm text-gray-600"><%= request.volunteer&.email || '—' %></span>
                   </td>
                   <td class="px-6 py-5">
                     <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
