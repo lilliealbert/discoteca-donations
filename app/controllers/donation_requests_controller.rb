@@ -22,6 +22,6 @@ class DonationRequestsController < ApplicationController
   end
 
   def donation_request_params
-    params.require(:donation_request).permit(:request_status, :notes)
+    params.require(:donation_request).permit(:request_status, :notes, :volunteer_id)
   end
 end

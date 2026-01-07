@@ -89,9 +89,17 @@
                     <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
                   </td>
                   <td class="py-5 pr-6 text-right">
-                    <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
-                      View<span class="sr-only">, <%= request.donor.name %></span>
-                    <% end %>
+                    <div class="flex items-center justify-end gap-3">
+                      <% if volunteer_signed_in? %>
+                        <%= button_to "Claim", donation_request_path(request),
+                            method: :patch,
+                            params: { donation_request: { volunteer_id: current_volunteer.id } },
+                            class: "rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
+                      <% end %>
+                      <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                        View<span class="sr-only">, <%= request.donor.name %></span>
+                      <% end %>
+                    </div>
                   </td>
                 </tr>
               <% end %>

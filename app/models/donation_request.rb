@@ -15,6 +15,8 @@ class DonationRequest < ApplicationRecord
     yes: "yes"
   }
 
+  validates :volunteer, presence: true, unless: :unasked?
+
   private
 
   def became_accepted?
