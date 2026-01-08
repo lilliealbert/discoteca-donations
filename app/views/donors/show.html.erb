@@ -104,7 +104,7 @@
                     <% end %>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-sm text-gray-600"><%= request.volunteer.email %></span>
+                    <span class="text-sm text-gray-600"><%= request.volunteer&.email %></span>
                   </td>
                   <td class="px-6 py-5">
                     <% status_classes = case request.request_status
