@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_07_235524) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_08_005527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_07_235524) do
 
   create_table "donors", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "donor_type"
     t.string "email_address"
     t.string "name"
     t.text "notes"

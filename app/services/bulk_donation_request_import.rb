@@ -20,7 +20,8 @@ class BulkDonationRequestImport
     # 4: Website
     # 5: Relationship to TECA
     # 6: Donor Notes
-    # 7: Donation Notes
+    # 7: Donor Type
+    # 8: Donation Notes
 
     contents.each do |row|
       donor = Donor.find_or_create_by(name: row[0])
@@ -30,9 +31,23 @@ class BulkDonationRequestImport
       donor.website = row[4] if row[4].present?
       donor.relationship_to_teca = row[5] if row[5].present?
       donor.notes = row[6] if row[6].present?
+      donor.donor_type = parse_type(row[7]) if row[7].present?
       donor.save!
 
-      DonationRequest.create!(event_id: @event_id, donor: donor, notes: "#{@note_prefix}#{row[7]}")
+      DonationRequest.create!(event_id: @event_id, donor: donor, notes: "#{@note_prefix}#{row[8]}")
+    end
+  end
+
+  private
+
+  def parse_type(type)
+    case type
+    when "Family" || "family"
+      "family"
+    when "Staff" || "staff"
+      "staff"
+    when "Business/Non-profit" || "business/non-profit"
+      "business_nonprofit"
     end
   end
 end

@@ -12,8 +12,8 @@ RSpec.describe "BulkImports", type: :request do
     sign_in volunteer, scope: :volunteer
 
     CSV.open(file.path, 'w') do |csv|
-      csv << ["Name", "Primary Contact", "Email", "Phone", "Website", "Relationship to TECA", "Donor Notes", "Donation Notes"]
-      csv << ["Test Donor", "John Smith", "john@example.com", "https://example.com", "Great donor", "Wine basket"]
+      csv << ["Name", "Primary Contact", "Email", "Phone", "Website", "Relationship to TECA", "Donor Notes", "Donor Type", "Donation Notes"]
+      csv << ["Test Donor", "John Smith", "john@example.com", "415-111-1111", "https://example.com", "2nd grade parent", "Great donor", "family", "Wine basket"]
     end
     file.rewind
   end
