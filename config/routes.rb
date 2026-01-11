@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :volunteers
   resources :events, only: [:index, :show]
-  resources :donors, only: [:index, :show]
+  resources :donors, only: [:index, :show, :edit, :update]
   resources :volunteers, only: [:index, :show]
   resources :donation_requests, only: [:show, :edit, :update]
   resources :donations, only: [:show, :edit, :update]

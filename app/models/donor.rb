@@ -8,5 +8,5 @@ class Donor < ApplicationRecord
     business_nonprofit: "Business/Non-profit"
   }
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 end
