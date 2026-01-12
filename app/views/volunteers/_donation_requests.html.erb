@@ -34,19 +34,7 @@
             <% end %>
           </td>
           <td class="px-6 py-5">
-            <% status_classes = case request.request_status
-                                when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
-                                when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
-                                when 'asked_twice' then 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-                                when 'asked_thrice' then 'bg-orange-50 text-orange-700 ring-orange-600/20'
-                                when 'no' then 'bg-red-50 text-red-700 ring-red-600/20'
-                                when 'yes' then 'bg-green-50 text-green-700 ring-green-600/20'
-                                else 'bg-gray-50 text-gray-600 ring-gray-500/10'
-                                end %>
-            <% status_label = request.request_status&.humanize || 'Unknown' %>
-            <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
-              <%= status_label %>
-            </span>
+            <div data-status-editor data-request-id="<%= request.id %>" data-initial-status="<%= request.request_status %>"></div>
           </td>
           <td class="px-6 py-5">
             <% if request.notes.present? %>

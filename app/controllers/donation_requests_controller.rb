@@ -11,13 +11,21 @@ class DonationRequestsController < ApplicationController
     was_unclaimed = @donation_request.volunteer_id.nil?
 
     if @donation_request.update(donation_request_params)
-      if was_unclaimed && @donation_request.volunteer_id.present?
-        redirect_to event_path(@donation_request.event), notice: "#{@donation_request.donor.name} claimed successfully."
-      else
-        redirect_to @donation_request, notice: "Donation request updated successfully."
+      respond_to do |format|
+        format.html do
+          if was_unclaimed && @donation_request.volunteer_id.present?
+            redirect_to event_path(@donation_request.event), notice: "#{@donation_request.donor.name} claimed successfully."
+          else
+            redirect_to @donation_request, notice: "Donation request updated successfully."
+          end
+        end
+        format.json { render json: { status: @donation_request.request_status } }
       end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: { errors: @donation_request.errors }, status: :unprocessable_entity }
+      end
     end
   end
 
