@@ -38,6 +38,8 @@
           <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
           <%= link_to "Volunteers", volunteers_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
           <%= link_to "Templates", templates_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+          <%= link_to "Account", edit_volunteer_registration_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+          <%= button_to "Log out", destroy_volunteer_session_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer" %>
         </div>
       </nav>
     </header>

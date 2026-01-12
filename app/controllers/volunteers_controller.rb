@@ -15,6 +15,5 @@ class VolunteersController < ApplicationController
     @volunteer = current_volunteer
     @donation_requests = @volunteer.donation_requests.joins(:event).where(events: { date: Date.today.. }).includes(:donor, :event)
     @donations = @volunteer.donations.joins(:event).where(events: { date: Date.today.. }).includes(:donor, :event)
-    render :show
   end
 end

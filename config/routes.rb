@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :volunteers
+  devise_for :volunteers, controllers: { registrations: "volunteers/registrations" }
   resources :events, only: [:index, :show]
   resources :donors, only: [:index, :show, :edit, :update]
   resources :volunteers, only: [:index, :show]
