@@ -4,7 +4,7 @@ require 'csv'
 RSpec.describe "BulkImports", type: :request do
   include Devise::Test::IntegrationHelpers
 
-  let(:volunteer) { Volunteer.create!(email: "test@example.com", password: "password123") }
+  let(:volunteer) { Volunteer.create!(email: "test@example.com", password: "password123", name: "Coolest Lemur") }
   let(:event) { Event.create!(name: "Test Auction", date: Date.tomorrow) }
   let(:file) { Tempfile.new(['import', '.csv']) }
 
