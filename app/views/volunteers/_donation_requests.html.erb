@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <% if @open_donation_requests.any? %>
+    <% if @open_donation_requests.present? %>
       <% @open_donation_requests.each_with_index do |request, index| %>
         <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
           <td class="py-5 pl-6 pr-3">
