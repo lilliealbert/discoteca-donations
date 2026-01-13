@@ -29,17 +29,41 @@
 
   <body class="font-['Inter',system-ui,sans-serif] antialiased text-gray-900 bg-gray-50">
     <header class="border-b border-gray-200 bg-white">
-      <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <%= link_to root_path, class: "text-lg font-semibold text-gray-900 hover:text-indigo-600 transition-colors" do %>
-          DiscoTECA Donations App
-        <% end %>
-        <div class="flex items-center gap-6">
-          <%= link_to "Events", events_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
-          <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
-          <%= link_to "Volunteers", volunteers_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
-          <%= link_to "Templates", templates_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
-          <%= link_to "Account", edit_volunteer_registration_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
-          <%= button_to "Log out", destroy_volunteer_session_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer" %>
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between py-4">
+          <%= link_to root_path, class: "text-lg font-semibold text-gray-900 hover:text-indigo-600 transition-colors" do %>
+            DiscoTECA Donations App
+          <% end %>
+
+          <!-- Desktop nav -->
+          <div class="hidden md:flex items-center gap-6">
+            <%= link_to "Events", events_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+            <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+            <%= link_to "Volunteers", volunteers_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+            <%= link_to "Templates", templates_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+            <%= link_to "Account", edit_volunteer_registration_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
+            <%= button_to "Log out", destroy_volunteer_session_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer" %>
+          </div>
+
+          <!-- Mobile menu button -->
+          <button type="button" class="md:hidden p-2 text-gray-600 hover:text-gray-900" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <span class="sr-only">Open menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile nav -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 py-3">
+          <div class="flex flex-col gap-3">
+            <%= link_to "Events", events_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
+            <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
+            <%= link_to "Volunteers", volunteers_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
+            <%= link_to "Templates", templates_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
+            <%= link_to "Account", edit_volunteer_registration_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
+            <%= button_to "Log out", destroy_volunteer_session_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer text-left py-2" %>
+          </div>
         </div>
       </nav>
     </header>

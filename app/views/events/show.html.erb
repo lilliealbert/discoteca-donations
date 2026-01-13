@@ -1,4 +1,4 @@
-<div class="min-h-screen">
+<div class="min-h-screen overflow-x-hidden">
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <nav class="mb-8">
       <%= link_to events_path, class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
@@ -26,7 +26,7 @@
         <p class="mt-1 text-sm text-gray-500">Donation requests not yet claimed by a volunteer — grab one or ten!</p>
       </header>
 
-      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
@@ -36,7 +36,7 @@
               <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Status
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Notes
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
@@ -66,7 +66,7 @@
                       <%= status_label %>
                     </span>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% if request.notes.present? %>
                       <span class="group relative cursor-help">
                         <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
@@ -113,7 +113,7 @@
         <p class="mt-1 text-sm text-gray-500">Donation requests awaiting response</p>
       </header>
 
-      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
@@ -126,7 +126,7 @@
               <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Status
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Notes
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
@@ -161,7 +161,7 @@
                       <%= status_label %>
                     </span>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% if request.notes.present? %>
                       <span class="group relative cursor-help">
                         <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
@@ -199,7 +199,7 @@
         <h2 class="text-xl font-semibold text-gray-900">Confirmed Donations</h2>
       </header>
 
-      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
@@ -292,7 +292,7 @@
         <p class="mt-1 text-sm text-gray-500">Requests that were declined</p>
       </header>
 
-      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
@@ -302,7 +302,7 @@
               <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Volunteer Contact
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                 Notes
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
@@ -322,7 +322,7 @@
                   <td class="px-6 py-5">
                     <span class="text-sm text-gray-600"><%= request.volunteer&.email || '—' %></span>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% if request.notes.present? %>
                       <span class="group relative cursor-help">
                         <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>

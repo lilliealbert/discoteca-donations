@@ -1,4 +1,4 @@
-<div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
   <table class="min-w-full">
     <thead>
     <tr class="border-b border-gray-200 bg-gray-50/75">
@@ -11,7 +11,7 @@
       <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
         Status
       </th>
-      <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+      <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
         Notes
       </th>
       <th scope="col" class="relative py-4 pl-3 pr-6">
@@ -36,7 +36,7 @@
           <td class="px-6 py-5">
             <div data-status-editor data-request-id="<%= request.id %>" data-initial-status="<%= request.request_status %>"></div>
           </td>
-          <td class="px-6 py-5">
+          <td class="hidden md:table-cell px-6 py-5">
             <% if request.notes.present? %>
               <span class="group relative cursor-help">
                 <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
