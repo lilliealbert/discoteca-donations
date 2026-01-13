@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./components/StatusEditor.jsx"
+import "./components/DonationRequestForm.jsx"

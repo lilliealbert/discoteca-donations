@@ -5,6 +5,14 @@ class DonationRequestPolicy < ApplicationPolicy
     true
   end
 
+  def new?
+    volunteer.present?
+  end
+
+  def create?
+    volunteer.present?
+  end
+
   def update?
     return true if admin?
     return false unless volunteer

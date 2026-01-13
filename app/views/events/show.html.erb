@@ -10,12 +10,24 @@
     </nav>
 
     <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8">
-        <h1 class="text-2xl font-bold tracking-tight text-gray-900"><%= @event.name %></h1>
-        <% if @event.date.present? %>
-          <p class="mt-2 text-base text-gray-600">
-            <time datetime="<%= @event.date.iso8601 %>"><%= @event.date.strftime("%A, %B %d, %Y") %></time>
-          </p>
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8 sm:flex sm:items-center sm:justify-between">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900"><%= @event.name %></h1>
+          <% if @event.date.present? %>
+            <p class="mt-2 text-base text-gray-600">
+              <time datetime="<%= @event.date.iso8601 %>"><%= @event.date.strftime("%A, %B %d, %Y") %></time>
+            </p>
+          <% end %>
+        </div>
+        <% if volunteer_signed_in? %>
+          <div class="mt-4 sm:mt-0">
+            <%= link_to new_donation_request_path(event_id: @event.id), class: "inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors" do %>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              New Donation Request
+            <% end %>
+          </div>
         <% end %>
       </header>
     </article>

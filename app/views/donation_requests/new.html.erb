@@ -1,0 +1,34 @@
+<div class="min-h-screen">
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <nav class="mb-8">
+      <%= link_to root_path, class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Cancel
+      <% end %>
+    </nav>
+
+    <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">New Donation Request</h1>
+        <p class="mt-2 text-base text-gray-600">
+          Create a new donation request for an existing or new donor.
+        </p>
+      </header>
+
+      <div
+        data-donation-request-form
+        data-donors="<%= @donors.map { |d| { id: d.id, name: d.name } }.to_json %>"
+        data-events="<%= @events.map { |e| { id: e.id, name: e.name } }.to_json %>"
+        data-form-action="<%= donation_requests_path %>"
+        data-selected-event-id="<%= @selected_event_id %>"
+        data-current-volunteer="<%= { id: current_volunteer.id, name: current_volunteer.name, email: current_volunteer.email }.to_json %>"
+      >
+        <div class="px-6 py-12 text-center text-gray-500">
+          Loading form
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

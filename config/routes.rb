@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show]
   resources :donors, only: [:index, :show, :edit, :update]
   resources :volunteers, only: [:index, :show]
-  resources :donation_requests, only: [:show, :edit, :update]
+  resources :donation_requests, only: [:show, :new, :create, :edit, :update]
   resources :donations, only: [:show, :edit, :update]
   resources :bulk_imports, only: [:new, :create]
   resources :templates, only: [:index]
