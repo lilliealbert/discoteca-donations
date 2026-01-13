@@ -7,4 +7,16 @@
     padding: 2px;
     border-radius: 0;
   }
+
+  p, li {
+    a {
+      color: var(--color-indigo-600);
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: var(--color-indigo-500);
+    }
+  }
+
 }

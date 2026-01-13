@@ -45,7 +45,10 @@
                 <td class="px-6 py-5">
                   <span class="text-sm text-gray-600"><%= donor.relationship_to_teca.presence || "—" %></span>
                 </td>
-                <td class="py-5 pr-6 text-right">
+                <td class="py-5 pr-6 text-right space-x-3">
+                  <%= link_to edit_donor_path(donor), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                    Edit<span class="sr-only">, <%= donor.name %></span>
+                  <% end %>
                   <%= link_to donor_path(donor), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
                     View<span class="sr-only">, <%= donor.name %></span>
                   <% end %>

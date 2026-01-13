@@ -20,8 +20,8 @@
     </tr>
     </thead>
     <tbody>
-    <% if @donation_requests.any? %>
-      <% @donation_requests.each_with_index do |request, index| %>
+    <% if @open_donation_requests.any? %>
+      <% @open_donation_requests.each_with_index do |request, index| %>
         <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
           <td class="py-5 pl-6 pr-3">
             <%= link_to donor_path(request.donor), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" do %>
@@ -46,7 +46,10 @@
               <span class="text-sm text-gray-500">—</span>
             <% end %>
           </td>
-          <td class="py-5 pr-6 text-right">
+          <td class="py-5 pr-6 text-right space-x-3">
+            <%= link_to edit_donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+              Edit<span class="sr-only">, <%= request.donor.name %></span>
+            <% end %>
             <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
               View<span class="sr-only">, <%= request.donor.name %></span>
             <% end %>
@@ -59,8 +62,8 @@
           <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
           </svg>
-          <h3 class="mt-4 text-sm font-semibold text-gray-900">No donation requests</h3>
-          <p class="mt-1 text-sm text-gray-500">This volunteer has no assigned donation requests.</p>
+          <h3 class="mt-4 text-sm font-semibold text-gray-900">No open donation requests</h3>
+          <p class="mt-1 text-sm text-gray-500"><%= link_to "Click here to claim someone", event_path(Event.last)%> to reach out to for auction donations!</p>
         </td>
       </tr>
     <% end %>

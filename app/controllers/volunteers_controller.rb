@@ -13,7 +13,7 @@ class VolunteersController < ApplicationController
 
   def dashboard
     @volunteer = current_volunteer
-    @donation_requests = @volunteer.donation_requests.joins(:event).where(events: { date: Date.today.. }).includes(:donor, :event)
+    @open_donation_requests = @volunteer.donation_requests.joins(:event).open.where(events: { date: Date.today.. }).includes(:donor, :event)
     @donations = @volunteer.donations.joins(:event).where(events: { date: Date.today.. }).includes(:donor, :event)
   end
 end

@@ -18,31 +18,12 @@
           </p>
         <% end %>
       </header>
-
-      <dl class="divide-y divide-gray-100">
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">Event name</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @event.name %></dd>
-        </div>
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">Date</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @event.date&.strftime("%B %d, %Y") || "Not set" %></dd>
-        </div>
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">Created</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @event.created_at.strftime("%B %d, %Y at %l:%M %p") %></dd>
-        </div>
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">Last updated</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @event.updated_at.strftime("%B %d, %Y at %l:%M %p") %></dd>
-        </div>
-      </dl>
     </article>
 
     <section class="mt-10">
       <header class="mb-6">
         <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests</h2>
-        <p class="mt-1 text-sm text-gray-500">Donation requests not yet assigned to a volunteer</p>
+        <p class="mt-1 text-sm text-gray-500">Donation requests not yet claimed by a volunteer — grab one or ten!</p>
       </header>
 
       <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -86,7 +67,14 @@
                     </span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
+                    <% if request.notes.present? %>
+                      <span class="group relative cursor-help">
+                        <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
+                        <span class="invisible group-hover:visible absolute left-0 top-full z-10 mt-1 w-64 rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-lg whitespace-pre-wrap"><%= request.notes %></span>
+                      </span>
+                    <% else %>
+                      <span class="text-sm text-gray-500">—</span>
+                    <% end %>
                   </td>
                   <td class="py-5 pr-6 text-right">
                     <div class="flex items-center justify-end gap-3">
@@ -174,7 +162,14 @@
                     </span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
+                    <% if request.notes.present? %>
+                      <span class="group relative cursor-help">
+                        <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
+                        <span class="invisible group-hover:visible absolute left-0 top-full z-10 mt-1 w-64 rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-lg whitespace-pre-wrap"><%= request.notes %></span>
+                      </span>
+                    <% else %>
+                      <span class="text-sm text-gray-500">—</span>
+                    <% end %>
                   </td>
                   <td class="py-5 pr-6 text-right">
                     <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
@@ -328,7 +323,14 @@
                     <span class="text-sm text-gray-600"><%= request.volunteer&.email || '—' %></span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes.presence || '—' %></span>
+                    <% if request.notes.present? %>
+                      <span class="group relative cursor-help">
+                        <span class="text-sm text-gray-500 truncate max-w-xs block"><%= request.notes %></span>
+                        <span class="invisible group-hover:visible absolute left-0 top-full z-10 mt-1 w-64 rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-lg whitespace-pre-wrap"><%= request.notes %></span>
+                      </span>
+                    <% else %>
+                      <span class="text-sm text-gray-500">—</span>
+                    <% end %>
                   </td>
                   <td class="py-5 pr-6 text-right">
                     <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>

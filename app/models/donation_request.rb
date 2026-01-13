@@ -15,6 +15,8 @@ class DonationRequest < ApplicationRecord
     yes: "yes"
   }
 
+  scope :open, -> { where.not(request_status: %w[yes no]) }
+
   validates :volunteer, presence: true, unless: :unasked?
 
   private
