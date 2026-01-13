@@ -50,17 +50,26 @@ class DonationRequestsController < ApplicationController
   def update
     authorize @donation_request
     was_unclaimed = @donation_request.volunteer_id.nil?
+    became_yes = @donation_request.request_status != "yes" && donation_request_params[:request_status] == "yes"
 
     if @donation_request.update(donation_request_params)
       respond_to do |format|
         format.html do
-          if was_unclaimed && @donation_request.volunteer_id.present?
+          if became_yes && @donation_request.donation.present?
+            redirect_to edit_donation_path(@donation_request.donation), notice: "That's awesome! Please add details about the donation below."
+          elsif was_unclaimed && @donation_request.volunteer_id.present?
             redirect_to event_path(@donation_request.event), notice: "#{@donation_request.donor.name} claimed successfully."
           else
             redirect_to @donation_request, notice: "Donation request updated successfully."
           end
         end
-        format.json { render json: { status: @donation_request.request_status } }
+        format.json do
+          response_data = { status: @donation_request.request_status }
+          if became_yes && @donation_request.donation.present?
+            response_data[:redirect_to] = edit_donation_path(@donation_request.donation, notice: "That's awesome! Please add details about the donation below.")
+          end
+          render json: response_data
+        end
       end
     else
       respond_to do |format|

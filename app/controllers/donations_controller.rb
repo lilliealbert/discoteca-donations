@@ -8,6 +8,8 @@ class DonationsController < ApplicationController
 
   def edit
     authorize @donation
+    # Support flash message from query param (for JS redirects)
+    flash.now[:notice] = params[:notice] if params[:notice].present?
   end
 
   def update

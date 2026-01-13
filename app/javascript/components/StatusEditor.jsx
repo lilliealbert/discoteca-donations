@@ -41,8 +41,14 @@ function StatusEditor({ requestId, initialStatus, csrfToken }) {
       })
 
       if (response.ok) {
+        const data = await response.json()
         setStatus(newStatus)
         setIsEditing(false)
+
+        // Redirect to donation edit page if status changed to "yes"
+        if (data.redirect_to) {
+          window.location.href = data.redirect_to
+        }
       } else {
         alert('Failed to update status')
       }

@@ -8,6 +8,7 @@
           <li>We have an initial request template, along with many follow-up email templates, in the <%= link_to "Template Zone", templates_path %></li>
           <li>It's <span class="italic">really</span> helpful if you update the status of your requests as you send emails; just click on the little pencil icon below.</li>
           <li>Add notes please!</li>
+          <li>You can claim more donation requests <%= link_to "right over here", event_path(Event.where(events: {name: Event::CURRENT_AUCTION_NAME}).first) %> 💖</li>
         </ul>
         </p>
       </header>
