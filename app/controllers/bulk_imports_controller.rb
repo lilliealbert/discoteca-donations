@@ -2,10 +2,12 @@ class BulkImportsController < ApplicationController
   before_action :authenticate_volunteer!
 
   def new
+    authorize :bulk_import
     @events = Event.order(date: :desc)
   end
 
   def create
+    authorize :bulk_import
     if params[:file].blank?
       redirect_to new_bulk_import_path, alert: "Please select a CSV file."
       return

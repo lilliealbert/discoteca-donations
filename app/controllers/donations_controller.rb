@@ -1,13 +1,17 @@
 class DonationsController < ApplicationController
+  before_action :authenticate_volunteer!, except: [:show]
   before_action :set_donation
 
   def show
+    authorize @donation
   end
 
   def edit
+    authorize @donation
   end
 
   def update
+    authorize @donation
     if @donation.update(donation_params)
       redirect_to @donation, notice: "Donation updated successfully."
     else

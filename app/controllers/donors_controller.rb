@@ -1,4 +1,5 @@
 class DonorsController < ApplicationController
+  before_action :authenticate_volunteer!, except: [:index, :show]
   before_action :set_donor, only: [:show, :edit, :update]
 
   def index
@@ -10,9 +11,11 @@ class DonorsController < ApplicationController
   end
 
   def edit
+    authorize @donor
   end
 
   def update
+    authorize @donor
     if @donor.update(donor_params)
       redirect_to @donor, notice: "Donor updated successfully."
     else

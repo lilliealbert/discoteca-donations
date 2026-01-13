@@ -1,13 +1,17 @@
 class DonationRequestsController < ApplicationController
+  before_action :authenticate_volunteer!, except: [:show]
   before_action :set_donation_request
 
   def show
+    authorize @donation_request
   end
 
   def edit
+    authorize @donation_request
   end
 
   def update
+    authorize @donation_request
     was_unclaimed = @donation_request.volunteer_id.nil?
 
     if @donation_request.update(donation_request_params)
