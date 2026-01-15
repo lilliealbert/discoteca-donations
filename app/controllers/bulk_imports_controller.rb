@@ -1,6 +1,4 @@
 class BulkImportsController < ApplicationController
-  before_action :authenticate_volunteer!
-
   def new
     authorize :bulk_import
     @events = Event.order(date: :desc)

@@ -1,5 +1,4 @@
 class DonorsController < ApplicationController
-  before_action :authenticate_volunteer!, except: [:index, :show]
   before_action :set_donor, only: [:show, :edit, :update]
 
   def index

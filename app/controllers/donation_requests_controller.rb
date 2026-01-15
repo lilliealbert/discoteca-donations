@@ -1,5 +1,4 @@
 class DonationRequestsController < ApplicationController
-  before_action :authenticate_volunteer!, except: [:show]
   before_action :set_donation_request, only: [:show, :edit, :update]
 
   def show

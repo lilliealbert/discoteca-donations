@@ -1,6 +1,4 @@
 class VolunteersController < ApplicationController
-  before_action :authenticate_volunteer!, only: [:dashboard]
-
   def index
     @volunteers = Volunteer.order(name: :asc, email: :asc)
   end
