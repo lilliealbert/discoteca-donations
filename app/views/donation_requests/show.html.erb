@@ -43,9 +43,17 @@
           </dd>
         </div>
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">Event</dt>
+          <dt class="text-sm font-medium text-gray-500">Contact Info</dt>
           <dd class="mt-1 text-sm sm:col-span-2 sm:mt-0">
-            <%= link_to @donation_request.event.name, event_path(@donation_request.event), class: "text-indigo-600 hover:text-indigo-500" %>
+            <% if @donation_request.donor.email_address.present? %>
+              Email: <%= @donation_request.donor.email_address %><br />
+            <% end %>
+            <% if @donation_request.donor.website.present? %>
+              Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website %><br />
+            <% end %>
+            <% if @donation_request.donor.phone_number.present? %>
+              Phone: <%= @donation_request.donor.phone_number %><br />
+            <% end %>
           </dd>
         </div>
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
