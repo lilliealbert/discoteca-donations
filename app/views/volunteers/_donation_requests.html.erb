@@ -21,7 +21,7 @@
       <% @open_donation_requests.each_with_index do |request, index| %>
         <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
           <td class="py-5 pl-6 pr-3">
-            <%= link_to donor_path(request.donor), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" do %>
+            <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
               <%= request.donor.name %>
             <% end %>
           </td>

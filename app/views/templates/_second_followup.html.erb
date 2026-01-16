@@ -1,0 +1,22 @@
+<article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+  <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-4 flex items-center justify-between">
+    <div>
+      <h2 class="text-lg font-semibold text-gray-900">Second Follow-Up Email</h2>
+      <p class="text-sm text-gray-500">Another friendly nudge for unresponsive contacts</p>
+    </div>
+    <button onclick="copyRichText('template-3')" class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
+      Copy
+    </button>
+  </header>
+  <div id="template-3" class="px-6 py-6 prose prose-sm max-w-none text-gray-700">
+    <p class="mb-4">Hi there! I hope this finds you well.</p>
+    <p class="mb-4">We're still collecting donations for Thomas Edison Charter Academy's annual auction fundraiser on May 8, 2026 and would love to have your business participate. Even a smaller contribution like a gift card or gift certificate would be greatly appreciated and would help support essential programs for our students.</p>
+    <p class="mb-4">If you have any questions or would like to discuss options, just reply to this email. Thank you for your time and consideration!</p>
+
+    <p class="mt-6">Warm regards,<br>
+      <span><%= current_volunteer.name || "[Your Name]" %></span><br>
+      <span>TECA PTA member</span><br>
+      <span class="text-indigo-600"><%= current_volunteer.email || "[Your Email]" %></span>
+    </p>
+  </div>
+</article>

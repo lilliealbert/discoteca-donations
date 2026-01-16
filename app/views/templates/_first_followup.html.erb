@@ -1,0 +1,25 @@
+<article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+  <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-4 flex items-center justify-between">
+    <div>
+      <h2 class="text-lg font-semibold text-gray-900">First Follow-Up Email</h2>
+      <p class="text-sm text-gray-500">Follow up with businesses that haven't responded</p>
+    </div>
+    <button onclick="copyRichText('template-2')" class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
+      Copy
+    </button>
+  </header>
+  <div id="template-2" class="px-6 py-6 prose prose-sm max-w-none text-gray-700">
+    <p class="mb-4">Hello!</p>
+    <p class="mb-4">I wanted to follow up on my previous message about supporting Thomas Edison Charter Academy's annual auction fundraiser. I know how busy things can get, so I wanted to reach out in case my earlier email got lost in the shuffle.</p>
+    <p class="mb-4">Our auction will be held on May 8, 2026, and we're still looking for local businesses to contribute donations. Any contribution, big or small, makes a real difference for our students and helps fund essential programs at our Title I public school in the Mission.</p>
+    <p class="mb-4">As a reminder, your business will be recognized on our event materials and signage, giving you great visibility among our community of parents and teachers.</p>
+    <p class="mb-4">If you have any questions or would like to discuss donation options, please don't hesitate to reach out. We're happy to make the process as easy as possible for you.</p>
+    <p class="mb-4">Thank you for considering!</p>
+
+    <p class="mt-6">Best regards,<br>
+      <span><%= current_volunteer.name || "[Your Name]" %></span><br>
+      <span>TECA PTA member</span><br>
+      <span class="text-indigo-600"><%= current_volunteer.email || "[Your Email]" %></span>
+    </p>
+  </div>
+</article>

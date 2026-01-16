@@ -5,9 +5,9 @@
         <h2 class="text-xl font-semibold text-gray-900">Your Open Donation Requests</h2>
         <p class="mt-1 text-sm text-gray-500">Thank you SO much for your help! A few tips/requests:
         <ul class="mt-2 text-sm text-gray-500 list-disc list-inside space-y-1">
-          <li>We have an initial request template, along with many follow-up email templates, in the <%= link_to "Template Zone", templates_path %></li>
+          <li>The templates on the donation request page will update as you update the status; you can see all the templates in the <%= link_to "Template Zone", templates_path %>. Please customize!</li>
           <li>It's <span class="italic">really</span> helpful if you update the status of your requests as you send emails; just click on the little pencil icon below.</li>
-          <li>Add notes please!</li>
+          <li>Add notes please 🙏🏼</li>
           <li>You can claim more donation requests <%= link_to "right over here", event_path(Event.where(events: {name: Event::CURRENT_AUCTION_NAME}).first) %> 💖</li>
         </ul>
         </p>

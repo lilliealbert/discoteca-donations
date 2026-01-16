@@ -1,0 +1,23 @@
+<article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+  <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-4 flex items-center justify-between">
+    <div>
+      <h2 class="text-lg font-semibold text-gray-900">Third Follow-Up Email (Final)</h2>
+      <p class="text-sm text-gray-500">Last chance before the donation deadline</p>
+    </div>
+    <button onclick="copyRichText('template-4')" class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
+      Copy
+    </button>
+  </header>
+  <div id="template-4" class="px-6 py-6 prose prose-sm max-w-none text-gray-700">
+    <p class="mb-4">Hello!</p>
+    <p class="mb-4">I'm reaching out one last time about Thomas Edison Charter Academy's auction fundraiser on May 8, 2026. Our donation deadline is approaching, so this will be my last ping :)</p>
+    <p class="mb-4">If you're able to contribute, we'd be so grateful for any donation—gift cards, products, services, or experiences all make wonderful auction items. Your business will be recognized on our event materials and in front of our community of parents and teachers.</p>
+    <p class="mb-4">If you're unable to participate this year, no problem at all. Thank you for taking the time to consider our request, and we hope to connect with you in the future!</p>
+
+    <p class="mt-6">All the best,<br>
+      <span><%= current_volunteer.name || "[Your Name]" %></span><br>
+      <span>TECA PTA member</span><br>
+      <span class="text-indigo-600"><%= current_volunteer.email || "[Your Email]" %></span>
+    </p>
+  </div>
+</article>

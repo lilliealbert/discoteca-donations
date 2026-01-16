@@ -49,7 +49,7 @@
               Email: <%= @donation_request.donor.email_address %><br />
             <% end %>
             <% if @donation_request.donor.website.present? %>
-              Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website %><br />
+              Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website, class: "text-blue-600 underline hover:text-blue-500" %><br />
             <% end %>
             <% if @donation_request.donor.phone_number.present? %>
               Phone: <%= @donation_request.donor.phone_number %><br />
@@ -91,5 +91,37 @@
         </div>
       </dl>
     </article>
+    <script>
+        function copyRichText(elementId) {
+            const element = document.getElementById(elementId);
+            const htmlContent = element.innerHTML;
+            const textContent = element.innerText;
+
+            const clipboardItem = new ClipboardItem({
+                'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                'text/plain': new Blob([textContent], { type: 'text/plain' })
+            });
+
+            navigator.clipboard.write([clipboardItem]);
+        }
+    </script>
+    <header class="mt-8 mb-8">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">Send this email</h2>
+      <div class="mt-4 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3">
+        <p class="text-sm text-blue-800">Please add details! Your child's grade, your relationship to the business, their past donations, or ideas for what they might donate are all super helpful.</p>
+      </div>
+    </header>
+
+    <div class="space-y-8">
+      <% if @donation_request.unasked? %>
+        <%= render "templates/generic_business_request" %>
+      <% elsif @donation_request.asked_once? %>
+        <%= render "templates/first_followup" %>
+      <% elsif @donation_request.asked_twice? %>
+        <%= render "templates/second_followup" %>
+      <% elsif @donation_request.asked_thrice? %>
+        <%= render "templates/third_followup" %>
+      <% end %>
+    </div>
   </div>
 </div>
