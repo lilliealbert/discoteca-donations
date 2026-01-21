@@ -1,0 +1,100 @@
+<div class="min-h-screen overflow-x-hidden">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <nav class="mb-8">
+      <%= link_to root_path, class: "inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" do %>
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to dashboard
+      <% end %>
+    </nav>
+
+    <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Donation Offers</h1>
+        <p class="mt-2 text-base text-gray-600">
+          Donations offered through the public form that need to be reviewed
+        </p>
+      </header>
+    </article>
+
+    <section class="mt-10">
+      <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+        <table class="min-w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50/75">
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Donor
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Contact
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Donation Offer
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+                Submitted
+              </th>
+              <th scope="col" class="relative py-4 pl-3 pr-6">
+                <span class="sr-only">View</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @offered_requests.any? %>
+              <% @offered_requests.each_with_index do |request, index| %>
+                <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
+                  <td class="py-5 pl-6 pr-3">
+                    <%= link_to donor_path(request.donor), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" do %>
+                      <%= request.donor.name %>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="text-sm text-gray-600">
+                      <% if request.donor.email_address.present? %>
+                        <div><%= request.donor.email_address %></div>
+                      <% end %>
+                      <% if request.donor.phone_number.present? %>
+                        <div class="text-gray-500"><%= request.donor.phone_number %></div>
+                      <% end %>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <% if request.notes.present? %>
+                      <span class="group relative cursor-help">
+                        <span class="text-sm text-gray-600 truncate max-w-xs block"><%= truncate(request.notes, length: 60) %></span>
+                        <span class="invisible group-hover:visible absolute left-0 top-full z-10 mt-1 w-64 rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-lg whitespace-pre-wrap"><%= request.notes %></span>
+                      </span>
+                    <% else %>
+                      <span class="text-sm text-gray-500">—</span>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="text-sm text-gray-500">
+                      <%= time_ago_in_words(request.created_at) %> ago
+                    </span>
+                  </td>
+                  <td class="py-5 pr-6 text-right">
+                    <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                      View<span class="sr-only">, <%= request.donor.name %></span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="5" class="px-6 py-16 text-center">
+                  <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                  </svg>
+                  <h3 class="mt-4 text-sm font-semibold text-gray-900">No donation offers</h3>
+                  <p class="mt-1 text-sm text-gray-500">No donations have been offered through the public form yet.</p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

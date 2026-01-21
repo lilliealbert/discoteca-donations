@@ -8,5 +8,6 @@ class Donor < ApplicationRecord
     business_nonprofit: "Business/Non-profit"
   }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: { message: "is required" },
+                   uniqueness: { message: "already exists - whoops, we already have a donor with this name! Please email your donation offer to flourishdonations@gmail.com." }
 end

@@ -1,6 +1,13 @@
 class DonationRequestsController < ApplicationController
   before_action :set_donation_request, only: [:show, :edit, :update]
 
+  def offered
+    authorize DonationRequest
+    @offered_requests = DonationRequest.offered
+                                       .includes(:donor, :event)
+                                       .order(created_at: :desc)
+  end
+
   def show
     authorize @donation_request
   end
@@ -44,6 +51,7 @@ class DonationRequestsController < ApplicationController
 
   def edit
     authorize @donation_request
+    @volunteers = Volunteer.order(:name)
   end
 
   def update
@@ -72,7 +80,10 @@ class DonationRequestsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html do
+          @volunteers = Volunteer.order(:name)
+          render :edit, status: :unprocessable_entity
+        end
         format.json { render json: { errors: @donation_request.errors }, status: :unprocessable_entity }
       end
     end

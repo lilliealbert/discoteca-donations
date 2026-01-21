@@ -42,6 +42,7 @@
             <%= link_to "All Requests", event_path(Event.where(events: {name: Event::CURRENT_AUCTION_NAME}).first), class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
             <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
             <% if current_volunteer&.admin? %>
+              <%= link_to "Donation Offers", offered_donation_requests_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
               <%= link_to "Events", events_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
               <%= link_to "Volunteers", volunteers_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors" %>
             <% end %>
@@ -63,6 +64,7 @@
           <div class="flex flex-col gap-3">
             <%= link_to "Dashboard", root_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
             <% if current_volunteer&.admin? %>
+              <%= link_to "Donation Offers", offered_donation_requests_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
               <%= link_to "Events", events_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>
             <% end %>
             <%= link_to "Donors", donors_path, class: "text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors py-2" %>

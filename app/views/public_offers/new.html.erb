@@ -1,0 +1,117 @@
+<div class="min-h-screen">
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Offer a Donation</h1>
+        <p class="mt-2 text-base text-gray-600">
+          Thank you for your interest in supporting Thomas Edison Charter Academy!
+        </p>
+        <p class="mt-2 text-base text-gray-600">
+          TECA is a Title 1 public charter school in San Francisco, and its mission is to nurture the artistic, social,
+          emotional, and intellectual growth of each child so all our students become lifelong learners and innovative problem-solvers.
+          TECA offers a daily arts curriculum to all students, as well as an optional Spanish Dual Immersion Program.
+        </p>
+        <p class="mt-2 text-base text-gray-600">
+          Funds raised at our annual PTA auction will help1 pay for classroom expenses, arts and science enrichment, and student wellness programs that would not otherwise be possible.
+        </p>
+       <p class="mt-2 text-base text-gray-600">
+          Questions? Email flourishdonations@gmail.com.
+        </p>
+      </header>
+
+      <%= form_with model: @donor, url: public_offers_path, local: true, class: "divide-y divide-gray-100" do |f| %>
+        <% if @donor.errors.any? || @donation_request.errors.any? %>
+          <div class="px-6 py-5">
+            <div class="rounded-lg bg-red-50 p-4 border border-red-200">
+              <h3 class="text-sm font-medium text-red-800">
+                Please correct the following errors:
+              </h3>
+              <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+                <% @donor.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                <% @donation_request.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="px-6 py-6">
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Your Information</h2>
+
+          <div class="space-y-5">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :name, "Name / Business Name *", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.text_field :name, required: true, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "Your name or business name" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :donor_type, "Donor Type", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.select :donor_type, Donor.donor_types.map { |k, v| [v, k] }, { include_blank: "Select type..." }, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :email_address, "Email", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.email_field :email_address, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "email@example.com" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :phone_number, "Phone", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.telephone_field :phone_number, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "(555) 123-4567" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :primary_contact, "Contact Person", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.text_field :primary_contact, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "Contact person name (if different)" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :website, "Website", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.url_field :website, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "https://example.com" %>
+              </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+              <%= f.label :relationship_to_teca, "Relationship to TECA", class: "text-sm font-medium text-gray-500" %>
+              <div class="mt-1 sm:col-span-2 sm:mt-0">
+                <%= f.text_field :relationship_to_teca, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "e.g., Parent, Local business, Alumni" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-6 py-6">
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Donation Details</h2>
+
+          <div class="space-y-5">
+            <%= fields_for :donation_request, @donation_request do |dr| %>
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4">
+                <%= dr.label :notes, "What would you like to donate? *", class: "text-sm font-medium text-gray-500" %>
+                <div class="mt-1 sm:col-span-2 sm:mt-0">
+                  <%= dr.text_area :notes, rows: 4, required: true, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2", placeholder: "Please describe what you'd like to donate (items, services, gift cards, experiences, etc.)" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="px-6 py-5 flex items-center justify-end gap-3 bg-gray-50">
+          <%= f.submit "Submit Donation Offer", class: "rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
+        </div>
+      <% end %>
+    </article>
+  </div>
+</div>

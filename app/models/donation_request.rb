@@ -12,12 +12,14 @@ class DonationRequest < ApplicationRecord
     asked_twice: "asked_twice",
     asked_thrice: "asked_thrice",
     no: "no",
-    yes: "yes"
+    yes: "yes",
+    offered: "offered"
   }
 
   scope :open, -> { where.not(request_status: %w[yes no]) }
 
-  validates :volunteer, presence: true, unless: :unasked?
+  validates :volunteer, presence: true, unless: -> { unasked? || offered? }
+  validates :notes, presence: true, if: :offered?
 
   private
 

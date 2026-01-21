@@ -31,4 +31,8 @@ class DonationRequestPolicy < ApplicationPolicy
     # Can only claim unclaimed requests
     record.volunteer_id.nil?
   end
+
+  def offered?
+    admin?
+  end
 end
