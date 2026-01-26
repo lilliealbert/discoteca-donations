@@ -73,7 +73,7 @@ class DonationRequestsController < ApplicationController
         format.json do
           response_data = { status: @donation_request.request_status }
           if became_yes && @donation_request.donation.present?
-            response_data[:redirect_to] = edit_donation_path(@donation_request.donation, notice: "That's awesome! Please add details about the donation below.")
+            response_data[:redirect_to] = edit_donation_path(@donation_request.donation, notice: "That's awesome! Please add details about the donation below, and forward any gift certificates / paperwork to Kimia at flourishdonations@gmail.com")
           end
           render json: response_data
         end

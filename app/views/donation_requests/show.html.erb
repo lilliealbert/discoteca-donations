@@ -49,7 +49,7 @@
               Email: <%= @donation_request.donor.email_address %><br />
             <% end %>
             <% if @donation_request.donor.website.present? %>
-              Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website, class: "text-blue-600 underline hover:text-blue-500" %><br />
+              Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website, class: "text-blue-600 underline hover:text-blue-500", target: "_blank" %><br />
             <% end %>
             <% if @donation_request.donor.phone_number.present? %>
               Phone: <%= @donation_request.donor.phone_number %><br />
@@ -105,13 +105,22 @@
             navigator.clipboard.write([clipboardItem]);
         }
     </script>
+    <div class="mt-8 mb-8">
+      PTA Tax ID: <span id="tax-id" class="text-gray-700">90-1190780</span>
+      <button onclick="copyRichText('tax-id')" class="rounded-lg px-3 py-1.5 font-semibold shadow-sm bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors cursor-pointer">
+        Copy
+      </button><br />
+      Address: <span id="address" class="text-gray-700">3531 22nd Street, San Francisco CA 94114</span>
+      <button onclick="copyRichText('address')" class="rounded-lg px-3 py-1.5 font-semibold shadow-sm bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors cursor-pointer">
+        Copy
+      </button>
+    </div>
     <header class="mt-8 mb-8">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900">Send this email</h2>
       <div class="mt-4 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3">
         <p class="text-sm text-blue-800">Please add details! Your child's grade, your relationship to the business, their past donations, or ideas for what they might donate are all super helpful.</p>
       </div>
     </header>
-
     <div class="space-y-8">
       <% if @donation_request.unasked? %>
         <%= render "templates/generic_business_request" %>

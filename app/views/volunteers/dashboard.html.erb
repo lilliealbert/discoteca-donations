@@ -2,14 +2,24 @@
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <section>
       <header class="mb-6">
-        <h2 class="text-xl font-semibold text-gray-900">Your Open Donation Requests</h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-gray-900">Your Open Donation Requests</h2>
+          <div class="flex items-center gap-3">
+            <%= link_to new_public_offer_path, class: "rounded-lg bg-white text-sm font-semibold text-gray-700 border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors", target: "_blank" do %>
+              💖 Offer a Donation 💖
+            <% end %>
+            <%= link_to new_donation_request_path(event: Event.default_event.first), class: "rounded-lg bg-white text-sm font-semibold text-gray-700 border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors", target: "_blank" do %>
+              Add a new donor & request
+            <% end %>
+          </div>
+        </div>
         <p class="mt-1 text-sm text-gray-500">Thank you SO much for your help! A few tips/requests:
-        <ul class="mt-2 text-sm text-gray-500 list-disc list-inside space-y-1">
-          <li>The templates on the donation request page will update as you update the status; you can see all the templates in the <%= link_to "Template Zone", templates_path %>. Please customize!</li>
-          <li>It's <span class="italic">really</span> helpful if you update the status of your requests as you send emails; just click on the little pencil icon below.</li>
-          <li>Add notes please 🙏🏼</li>
-          <li>You can claim more donation requests <%= link_to "right over here", event_path(Event.where(events: {name: Event::CURRENT_AUCTION_NAME}).first) %> 💖</li>
-        </ul>
+          <ul class="mt-2 text-sm text-gray-500 list-disc list-inside space-y-1">
+            <li>The templates on the donation request page will update as you update the status; you can see all the templates in the <%= link_to "Template Zone", templates_path %>. Please customize!</li>
+            <li>It's <span class="italic">really</span> helpful if you update the status of your requests as you send emails; just click on the little pencil icon below.</li>
+            <li>Add notes please ✏️</li>
+            <li>You can claim more donation requests <%= link_to "right over here", event_path(Event.where(events: {name: Event::CURRENT_AUCTION_NAME}).first) %> 🙏🏼</li>
+          </ul>
         </p>
       </header>
       <%= render "donation_requests" %>
@@ -18,6 +28,7 @@
     <section class="mt-6">
       <header class="mb-6">
         <h2 class="text-xl font-semibold text-gray-900">Donations</h2>
+        <p class="mt-1 text-gray-700">✨ If you're sent a digital donation (gift certificate, etc.), please send it to Kimia at flourishdonations@gmail.com. ✨</p>
         <p class="mt-1 text-sm text-gray-500">Once you mark a donation request as confirmed, it will show up here. This is where we'll track whether or not we've actually received the item, and eventually whether it's listed on the auction website.</p>
       </header>
       <%= render "donations" %>
