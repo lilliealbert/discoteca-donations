@@ -9,4 +9,6 @@ class Donation < ApplicationRecord
     physical: "physical",
     other: "other"
   }
+
+  validates :short_description, presence: true
 end
