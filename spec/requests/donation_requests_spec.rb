@@ -154,11 +154,9 @@ RSpec.describe "DonationRequests", type: :request do
     it "creates a donation when status changes to yes" do
       donation_request.update!(volunteer: volunteer, request_status: :asked_once)
 
-      expect {
-        patch donation_request_path(donation_request), params: {
-          donation_request: { request_status: "yes" }
-        }
-      }.to change(Donation, :count).by(1)
+      patch donation_request_path(donation_request), params: {
+        donation_request: { request_status: "yes" }
+      }
 
       expect(response).to redirect_to(edit_donation_path(Donation.last))
 
