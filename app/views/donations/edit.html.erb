@@ -38,14 +38,13 @@
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.donor.name %></dd>
         </div>
 
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-          <dt class="text-sm font-medium text-gray-500">Event</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.event.name %></dd>
-        </div>
-
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-          <dt class="text-sm font-medium text-gray-500">Volunteer</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.volunteer&.email %></dd>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <%= form.label "Title", class: "text-sm font-medium text-gray-500" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= form.text_field :short_description,
+                                class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+                                placeholder: "REQUIRED: Headline for the donation" %>
+          </div>
         </div>
 
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
@@ -69,21 +68,12 @@
         </div>
 
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-          <%= form.label :short_description, class: "text-sm font-medium text-gray-500" %>
-          <div class="mt-1 sm:col-span-2 sm:mt-0">
-            <%= form.text_field :short_description,
-                class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-                placeholder: "Brief description of the donation..." %>
-          </div>
-        </div>
-
-        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
           <%= form.label :notes, class: "text-sm font-medium text-gray-500" %>
           <div class="mt-1 sm:col-span-2 sm:mt-0">
             <%= form.text_area :notes,
                 rows: 4,
                 class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-                placeholder: "Additional details about this donation..." %>
+                placeholder: "Additional details about this donation" %>
           </div>
         </div>
 
@@ -93,8 +83,13 @@
             <%= form.text_area :fine_print,
                 rows: 3,
                 class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-                placeholder: "Any restrictions, conditions, or special instructions..." %>
+                placeholder: "Any restrictions, conditions, or special instructions" %>
           </div>
+        </div>
+
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <dt class="text-sm font-medium text-gray-500">Volunteer</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.volunteer&.email %></dd>
         </div>
 
         <div class="px-6 py-5 flex items-center justify-end gap-3">
