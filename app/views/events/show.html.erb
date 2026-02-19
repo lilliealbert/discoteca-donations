@@ -46,24 +46,39 @@
       </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table class="min-w-full">
+        <table class="min-w-full" data-controller="sortable-table">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
-              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Donor
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Donor
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Status
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Status
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Notes
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Notes
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
                 <span class="sr-only">View</span>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-sortable-table-target="body">
             <% if @unclaimed_requests.any? %>
               <% @unclaimed_requests.each_with_index do |request, index| %>
                 <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
@@ -140,27 +155,47 @@
       </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table class="min-w-full">
+        <table class="min-w-full" data-controller="sortable-table">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
-              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Donor
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Donor
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Volunteer Contact
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Volunteer Contact
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Status
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Status
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Notes
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Notes
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
                 <span class="sr-only">View</span>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-sortable-table-target="body">
             <% if @donation_requests.any? %>
               <% @donation_requests.each_with_index do |request, index| %>
                 <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
@@ -233,30 +268,55 @@
       </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table class="min-w-full">
+        <table class="min-w-full" data-controller="sortable-table">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
-              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Description
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Description
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Donor
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Donor
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Volunteer Contact
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Volunteer Contact
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Type
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Type
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                In Hand
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  In Hand
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
                 <span class="sr-only">View</span>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-sortable-table-target="body">
             <% if @donations.any? %>
               <% @donations.each_with_index do |donation, index| %>
                 <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
@@ -333,24 +393,39 @@
       </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table class="min-w-full">
+        <table class="min-w-full" data-controller="sortable-table">
           <thead>
             <tr class="border-b border-gray-200 bg-gray-50/75">
-              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Donor
+              <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Donor
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Volunteer Contact
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Volunteer Contact
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
-              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-                Notes
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+                <span class="inline-flex items-center">
+                  Notes
+                  <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </span>
               </th>
               <th scope="col" class="relative py-4 pl-3 pr-6">
                 <span class="sr-only">View</span>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-sortable-table-target="body">
             <% if @declined_requests.any? %>
               <% @declined_requests.each_with_index do |request, index| %>
                 <tr class="<%= 'border-t border-gray-100' unless index.zero? %> hover:bg-gray-50/50 transition-colors">
