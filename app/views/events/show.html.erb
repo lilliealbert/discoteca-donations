@@ -39,7 +39,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
           <div>
-            <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests (<%= @unclaimed_requests.size %>)</h2>
             <p class="mt-1 text-sm text-gray-500">Donation requests not yet claimed by a volunteer — grab one or ten!</p>
           </div>
         </header>
@@ -47,8 +47,8 @@
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full" data-controller="sortable-table">
-          <thead>
-            <tr class="border-b border-gray-200 bg-gray-50/75">
+          <thead class="sticky top-0 z-10">
+            <tr class="border-b border-gray-200 bg-gray-50">
               <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Donor
@@ -148,7 +148,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
           <div>
-            <h2 class="text-xl font-semibold text-gray-900">Pending Requests</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Pending Requests (<%= @donation_requests.size %>)</h2>
             <p class="mt-1 text-sm text-gray-500">Donation requests awaiting response</p>
           </div>
         </header>
@@ -156,8 +156,8 @@
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full" data-controller="sortable-table">
-          <thead>
-            <tr class="border-b border-gray-200 bg-gray-50/75">
+          <thead class="sticky top-0 z-10">
+            <tr class="border-b border-gray-200 bg-gray-50">
               <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Donor
@@ -262,15 +262,15 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
           <div>
-            <h2 class="text-xl font-semibold text-gray-900">Confirmed Donations</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Confirmed Donations (<%= @donations.size %>)</h2>
           </div>
         </header>
       </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full" data-controller="sortable-table">
-          <thead>
-            <tr class="border-b border-gray-200 bg-gray-50/75">
+          <thead class="sticky top-0 z-10">
+            <tr class="border-b border-gray-200 bg-gray-50">
               <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Description
@@ -386,7 +386,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
           <div>
-            <h2 class="text-xl font-semibold text-gray-900">Declined</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Declined (<%= @declined_requests.size %>)</h2>
             <p class="mt-1 text-sm text-gray-500">Requests that were declined</p>
           </div>
         </header>
@@ -394,8 +394,8 @@
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full" data-controller="sortable-table">
-          <thead>
-            <tr class="border-b border-gray-200 bg-gray-50/75">
+          <thead class="sticky top-0 z-10">
+            <tr class="border-b border-gray-200 bg-gray-50">
               <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Donor
