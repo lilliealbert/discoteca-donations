@@ -32,11 +32,18 @@
       </header>
     </article>
 
-    <section class="mt-10">
-      <header class="mb-6">
-        <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests</h2>
-        <p class="mt-1 text-sm text-gray-500">Donation requests not yet claimed by a volunteer — grab one or ten!</p>
-      </header>
+    <details class="mt-10 group/collapse" open>
+      <summary class="mb-6 cursor-pointer list-none">
+        <header class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-gray-400 transition-transform group-open/collapse:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">Unclaimed Requests</h2>
+            <p class="mt-1 text-sm text-gray-500">Donation requests not yet claimed by a volunteer — grab one or ten!</p>
+          </div>
+        </header>
+      </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
@@ -117,13 +124,20 @@
           </tbody>
         </table>
       </div>
-    </section>
+    </details>
 
-    <section class="mt-10">
-      <header class="mb-6">
-        <h2 class="text-xl font-semibold text-gray-900">Pending Requests</h2>
-        <p class="mt-1 text-sm text-gray-500">Donation requests awaiting response</p>
-      </header>
+    <details class="mt-10 group/collapse" open>
+      <summary class="mb-6 cursor-pointer list-none">
+        <header class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-gray-400 transition-transform group-open/collapse:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">Pending Requests</h2>
+            <p class="mt-1 text-sm text-gray-500">Donation requests awaiting response</p>
+          </div>
+        </header>
+      </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
@@ -204,12 +218,19 @@
           </tbody>
         </table>
       </div>
-    </section>
+    </details>
 
-    <section class="mt-10">
-      <header class="mb-6">
-        <h2 class="text-xl font-semibold text-gray-900">Confirmed Donations</h2>
-      </header>
+    <details class="mt-10 group/collapse" open>
+      <summary class="mb-6 cursor-pointer list-none">
+        <header class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-gray-400 transition-transform group-open/collapse:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">Confirmed Donations</h2>
+          </div>
+        </header>
+      </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
@@ -296,13 +317,20 @@
           </tbody>
         </table>
       </div>
-    </section>
+    </details>
 
-    <section class="mt-10">
-      <header class="mb-6">
-        <h2 class="text-xl font-semibold text-gray-900">Declined</h2>
-        <p class="mt-1 text-sm text-gray-500">Requests that were declined</p>
-      </header>
+    <details class="mt-10 group/collapse" open>
+      <summary class="mb-6 cursor-pointer list-none">
+        <header class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-gray-400 transition-transform group-open/collapse:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">Declined</h2>
+            <p class="mt-1 text-sm text-gray-500">Requests that were declined</p>
+          </div>
+        </header>
+      </summary>
 
       <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
         <table class="min-w-full">
@@ -365,6 +393,6 @@
           </tbody>
         </table>
       </div>
-    </section>
+    </details>
   </div>
 </div>
