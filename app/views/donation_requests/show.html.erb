@@ -123,7 +123,11 @@
     </header>
     <div class="space-y-8">
       <% if @donation_request.unasked? %>
-        <%= render "templates/generic_business_request" %>
+        <% if @donation_request.donor.staff? %>
+          <%= render 'templates/generic_staff_request', staff_name: @donation_request.donor.primary_contact %>
+        <% else %>
+          <%= render "templates/generic_business_request" %>
+        <% end %>
       <% elsif @donation_request.asked_once? %>
         <%= render "templates/first_followup" %>
       <% elsif @donation_request.asked_twice? %>

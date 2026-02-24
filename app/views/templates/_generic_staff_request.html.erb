@@ -1,0 +1,24 @@
+<article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+  <header class="border-b border-gray-200 bg-gray-50/75 px-6 py-4 flex items-center justify-between">
+    <div>
+      <h2 class="text-lg font-semibold text-gray-900">Generic Staff Donation Request Letter</h2>
+      <p class="text-sm text-gray-500">Initial outreach template for TECA staff</p>
+    </div>
+    <button onclick="copyRichText('template-1')" class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
+      Copy
+    </button>
+  </header>
+  <div id="template-1" class="px-6 py-6 prose prose-sm max-w-none text-gray-700">
+    <p class="mb-4">Dear <%= staff_name.strip || "TECA staff" %>,</p>
+    <p class="mb-4">I hope you're having a wonderful week! I'm writing about DiscoTECA, our annual PTA auction coming up in April.</p>
+    <p class="mb-4">One of the most beloved (and effective) parts the auction are the teacher and staff experiences — things like lunch with a teacher, a special storytime, or an after school excursion. These moments mean the world to students and their families, and they always generate SO much enthusiasm.</p>
+    <p class="mb-4">We'd love to include you if you're interested and able — but absolutely no pressure! There's no set format, and even the simplest idea can be a huge hit. If you'd like to participate, have any questions, or have an idea for something we could auction, just reply to this email and we'll take care of the rest. </p>
+    <p class="mb-4">Thank you so much for everything you do for our students. We're grateful for you, and we'd love to have you attend the event itself! It will be Friday, April 17th at the Verdi Club from 6-10pm 🪩🕺🏻🪩</p>
+
+    <p class="mt-6">Sincerely,<br>
+      <span><%= current_volunteer.name || "[Your Name]" %></span><br>
+      <span>TECA PTA member</span><br>
+      <span class="text-indigo-600"><%= current_volunteer.email || "[Your Email]" %></span>
+    </p>
+  </div>
+</article>
