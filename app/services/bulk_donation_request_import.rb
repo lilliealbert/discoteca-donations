@@ -22,6 +22,7 @@ class BulkDonationRequestImport
     # 6: Donor Notes
     # 7: Donor Type
     # 8: Donation Notes
+    # 9: Assigned Volunteer
 
     contents.each do |row|
       donor = Donor.find_or_create_by(name: row[0])
@@ -34,19 +35,25 @@ class BulkDonationRequestImport
       donor.donor_type = parse_type(row[7]) if row[7].present?
       donor.save!
 
-      DonationRequest.create!(event_id: @event_id, donor: donor, notes: "#{@note_prefix}#{row[8]}")
+      request = DonationRequest.create!(event_id: @event_id, donor: donor, notes: "#{@note_prefix}#{row[8]}")
+
+      if row[9].present?
+        v = Volunteer.where(email: row[9]).first
+        request.volunteer = v if v
+        request.save!
+      end
     end
   end
 
   private
 
   def parse_type(type)
-    case type
-    when "Family" || "family"
+    case type.downcase
+    when "family"
       "family"
-    when "Staff" || "staff"
+    when "staff"
       "staff"
-    when "Business/Non-profit" || "business/non-profit"
+    when "business/non-profit"
       "business_nonprofit"
     end
   end
