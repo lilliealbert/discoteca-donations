@@ -68,18 +68,7 @@
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">Status</dt>
           <dd class="mt-1 sm:col-span-2 sm:mt-0">
-            <% status_classes = case @donation_request.request_status
-               when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
-               when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
-               when 'asked_twice' then 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-               when 'asked_thrice' then 'bg-orange-50 text-orange-700 ring-orange-600/20'
-               when 'no' then 'bg-red-50 text-red-700 ring-red-600/20'
-               when 'yes' then 'bg-green-50 text-green-700 ring-green-600/20'
-               else 'bg-gray-50 text-gray-600 ring-gray-500/10'
-               end %>
-            <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
-              <%= @donation_request.request_status&.humanize || 'Unknown' %>
-            </span>
+            <div data-status-editor data-request-id="<%= @donation_request.id %>" data-initial-status="<%= @donation_request.request_status %>"></div>
           </dd>
         </div>
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
