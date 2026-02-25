@@ -46,7 +46,12 @@
           <dt class="text-sm font-medium text-gray-500">Contact Info</dt>
           <dd class="mt-1 text-sm sm:col-span-2 sm:mt-0">
             <% if @donation_request.donor.email_address.present? %>
-              Email: <%= @donation_request.donor.email_address %><br />
+              <div class="flex items-center gap-2 mb-1">
+                <span>Email: <span id="donor-email"><%= @donation_request.donor.email_address %></span></span>
+                <button onclick="copyRichText('donor-email')" class="rounded px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors cursor-pointer">
+                  Copy
+                </button>
+              </div>
             <% end %>
             <% if @donation_request.donor.website.present? %>
               Website: <%= link_to @donation_request.donor.website, @donation_request.donor.website, class: "text-blue-600 underline hover:text-blue-500", target: "_blank" %><br />
