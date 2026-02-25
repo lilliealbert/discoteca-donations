@@ -23,7 +23,7 @@
               Email
             </th>
             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-              Requests
+              Open Requests
             </th>
             <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
               Donations
@@ -46,7 +46,27 @@
                   <%= link_to volunteer&.email, "mailto:#{volunteer&.email}", class: "text-sm text-indigo-600 hover:text-indigo-500" %>
                 </td>
                 <td class="px-6 py-5">
-                  <span class="text-sm text-gray-600"><%= volunteer.donation_requests.count %></span>
+                  <div class="flex flex-wrap gap-1">
+                    <% status_counts = volunteer.donation_requests.open.group(:request_status).count %>
+                    <% if status_counts.any? %>
+                      <% ordered_statuses = %w[unasked asked_once asked_twice asked_thrice offered] %>
+                      <% status_classes_map = {
+                           'unasked' => 'bg-gray-50 text-gray-600 ring-gray-500/10',
+                           'asked_once' => 'bg-blue-50 text-blue-700 ring-blue-600/20',
+                           'asked_twice' => 'bg-yellow-50 text-yellow-700 ring-yellow-600/20',
+                           'asked_thrice' => 'bg-orange-50 text-orange-700 ring-orange-600/20',
+                           'offered' => 'bg-purple-50 text-purple-700 ring-purple-600/20'
+                         } %>
+                      <% ordered_statuses.each do |status| %>
+                        <% next unless status_counts[status] %>
+                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset <%= status_classes_map[status] %>">
+                          <%= status.humanize %>: <%= status_counts[status] %>
+                        </span>
+                      <% end %>
+                    <% else %>
+                      <span class="text-sm text-gray-400">None</span>
+                    <% end %>
+                  </div>
                 </td>
                 <td class="px-6 py-5">
                   <span class="text-sm text-gray-600"><%= volunteer.donations.count %></span>
