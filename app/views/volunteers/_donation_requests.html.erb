@@ -2,7 +2,7 @@
   <table class="min-w-full" data-controller="sortable-table">
     <thead class="sticky top-0 z-10">
     <tr class="border-b border-gray-200 bg-gray-50">
-      <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+      <th scope="col" class="w-full py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
         <span class="inline-flex items-center">
           Donor
           <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -10,7 +10,7 @@
           </svg>
         </span>
       </th>
-      <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+      <th scope="col" class="min-w-36 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
         <span class="inline-flex items-center">
           Status
           <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -53,13 +53,15 @@
               <span class="text-sm text-gray-500">—</span>
             <% end %>
           </td>
-          <td class="py-5 pr-6 text-right space-x-3">
-            <%= link_to edit_donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
-              Edit<span class="sr-only">, <%= request.donor.name %></span>
-            <% end %>
-            <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
-              View<span class="sr-only">, <%= request.donor.name %></span>
-            <% end %>
+          <td class="py-5 pr-6 text-right">
+            <div class="flex flex-col items-end gap-1 sm:flex-row sm:gap-3">
+              <%= link_to edit_donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                Edit<span class="sr-only">, <%= request.donor.name %></span>
+              <% end %>
+              <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
+                View<span class="sr-only">, <%= request.donor.name %></span>
+              <% end %>
+            </div>
           </td>
         </tr>
       <% end %>

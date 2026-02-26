@@ -90,7 +90,7 @@ function StatusEditor({ requestId, initialStatus, csrfToken }) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${statusClasses}`}>
+      <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset whitespace-nowrap ${statusClasses}`}>
         {statusLabel}
       </span>
       <button

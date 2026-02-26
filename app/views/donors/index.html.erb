@@ -26,10 +26,10 @@
             <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
               Name
             </th>
-            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
               Type
             </th>
-            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
               Relationship
             </th>
             <th scope="col" class="relative py-4 pl-3 pr-6">
@@ -46,10 +46,10 @@
                     <%= donor.name %>
                   <% end %>
                 </td>
-                <td class="px-6 py-5">
+                <td class="hidden md:table-cell px-6 py-5">
                   <span class="text-sm text-gray-600"><%= Donor.donor_types[donor.donor_type] || "—" %></span>
                 </td>
-                <td class="px-6 py-5">
+                <td class="hidden md:table-cell px-6 py-5">
                   <span class="text-sm text-gray-600"><%= donor.relationship_to_teca.presence || "—" %></span>
                 </td>
                 <td class="py-5 pr-6 text-right space-x-3">

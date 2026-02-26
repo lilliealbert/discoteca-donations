@@ -57,7 +57,7 @@
                   </svg>
                 </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Status
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -65,7 +65,7 @@
                   </svg>
                 </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Donor Type
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -95,7 +95,7 @@
                       <%= request.donor.name %>
                     <% end %>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% status_classes = case request.request_status
                        when 'unasked' then 'bg-gray-50 text-gray-600 ring-gray-500/10'
                        when 'asked_once' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
@@ -108,7 +108,7 @@
                       <%= status_label %>
                     </span>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <span class="text-sm text-gray-600"><%= Donor.donor_types[request.donor.donor_type] || "—" %></span>
                   </td>
                   <td class="hidden md:table-cell px-6 py-5">
@@ -229,7 +229,7 @@
                        else 'bg-gray-50 text-gray-600 ring-gray-500/10'
                        end %>
                     <% status_label = request.request_status&.humanize || 'Unknown' %>
-                    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+                    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset whitespace-nowrap <%= status_classes %>">
                       <%= status_label %>
                     </span>
                   </td>
@@ -243,7 +243,7 @@
                       <span class="text-sm text-gray-500">—</span>
                     <% end %>
                   </td>
-                  <td class="py-5 pr-6 text-right">
+                  <td class="py-5 pr-6 text-right whitespace-nowrap">
                     <%= link_to donation_request_path(request), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" do %>
                       View<span class="sr-only">, <%= request.donor.name %></span>
                     <% end %>
@@ -298,7 +298,7 @@
                   </svg>
                 </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Volunteer Contact
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -306,7 +306,7 @@
                   </svg>
                 </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   Type
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -314,7 +314,7 @@
                   </svg>
                 </span>
               </th>
-              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+              <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
                 <span class="inline-flex items-center">
                   In Hand
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -341,10 +341,10 @@
                       <%= donation.donor.name %>
                     <% end %>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <%= donation.volunteer.name || donation.volunteer&.email %>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% type_classes = case donation.donation_type
                        when 'physical' then 'bg-blue-50 text-blue-700 ring-blue-600/20'
                        when 'digital' then 'bg-purple-50 text-purple-700 ring-purple-600/20'
@@ -355,7 +355,7 @@
                       <%= donation.donation_type&.humanize || 'Unknown' %>
                     </span>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <% if donation.in_hand %>
                       <span class="inline-flex items-center gap-1 text-sm text-green-600">
                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
@@ -416,7 +416,7 @@
                 </span>
               </th>
               <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
-                <span class="inline-flex items-center">
+                <span class="hidden md:table-cell inline-flex items-center">
                   Volunteer Contact
                   <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -445,7 +445,7 @@
                       <%= request.donor.name %>
                     <% end %>
                   </td>
-                  <td class="px-6 py-5">
+                  <td class="hidden md:table-cell px-6 py-5">
                     <span class="text-sm text-gray-600"><%= request.volunteer&.email || '—' %></span>
                   </td>
                   <td class="hidden md:table-cell px-6 py-5">

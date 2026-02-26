@@ -59,7 +59,7 @@
                          } %>
                       <% ordered_statuses.each do |status| %>
                         <% next unless status_counts[status] %>
-                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset <%= status_classes_map[status] %>">
+                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset whitespace-nowrap <%= status_classes_map[status] %>">
                           <%= status.humanize %>: <%= status_counts[status] %>
                         </span>
                       <% end %>
