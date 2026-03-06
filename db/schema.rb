@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_13_195657) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_06_232502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "auction_listings", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.bigint "donation_id", null: false
+    t.decimal "estimated_value", precision: 10, scale: 2
+    t.text "long_description"
+    t.text "short_description"
+    t.decimal "starting_bid", precision: 10, scale: 2
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["donation_id"], name: "index_auction_listings_on_donation_id"
+  end
 
   create_table "donation_requests", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -79,6 +92,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_195657) do
     t.index ["reset_password_token"], name: "index_volunteers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auction_listings", "donations"
   add_foreign_key "donation_requests", "donors"
   add_foreign_key "donation_requests", "events"
   add_foreign_key "donation_requests", "volunteers"

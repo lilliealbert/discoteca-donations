@@ -1,0 +1,89 @@
+<%= form_with model: @auction_listing, url: donation_auction_listing_path(@donation), class: "divide-y divide-gray-100" do |form| %>
+  <% if @auction_listing.errors.any? %>
+    <div class="px-6 py-5">
+      <div class="rounded-lg bg-red-50 p-4 border border-red-200">
+        <h3 class="text-sm font-medium text-red-800">
+          <%= pluralize(@auction_listing.errors.count, "error") %> prohibited this auction listing from being saved:
+        </h3>
+        <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+          <% @auction_listing.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <%= form.label :title, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <%= form.text_field :title,
+          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+          placeholder: "Title for the auction website" %>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+    <%= form.label :category, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <%= form.select :category,
+          AuctionListing.categories.keys.map { |c| [c.humanize.titleize, c] },
+          { prompt: "Select a category" },
+          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <%= form.label :short_description, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <%= form.text_area :short_description,
+          rows: 2,
+          maxlength: 70,
+          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+          placeholder: "Brief description for listing previews (70 chars max)" %>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <%= form.label :long_description, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <%= form.text_area :long_description,
+          rows: 5,
+          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+          placeholder: "Full description for the auction page" %>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+    <%= form.label :estimated_value, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">$</span>
+        <%= form.number_field :estimated_value,
+            step: 0.01,
+            min: 0,
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+            placeholder: "0.00" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+    <%= form.label :starting_bid, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">$</span>
+        <%= form.number_field :starting_bid,
+            step: 0.01,
+            min: 0,
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+            placeholder: "0.00" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-6 py-5 flex items-center justify-end gap-3">
+    <%= link_to "Cancel", @donation, class: "rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" %>
+    <%= form.submit class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
+  </div>
+<% end %>

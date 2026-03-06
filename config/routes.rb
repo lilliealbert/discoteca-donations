@@ -8,7 +8,9 @@ Rails.application.routes.draw do
       get :offered
     end
   end
-  resources :donations, only: [:show, :edit, :update]
+  resources :donations, only: [:show, :edit, :update] do
+    resource :auction_listing, only: [:new, :create, :edit, :update, :destroy]
+  end
   resources :bulk_imports, only: [:new, :create]
   resources :templates, only: [:index]
 

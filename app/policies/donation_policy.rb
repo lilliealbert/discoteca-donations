@@ -12,4 +12,8 @@ class DonationPolicy < ApplicationPolicy
     # Volunteers can edit donations they own
     record.volunteer_id == volunteer.id
   end
+
+  def manage_auction_listing?
+    admin?
+  end
 end
