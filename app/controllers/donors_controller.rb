@@ -7,6 +7,7 @@ class DonorsController < ApplicationController
 
   def show
     @donation_requests = @donor.donation_requests.includes(:event, :volunteer)
+    @donations = @donor.donations.includes(:event, :volunteer)
   end
 
   def edit
