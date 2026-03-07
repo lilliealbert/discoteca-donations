@@ -49,6 +49,6 @@ class AuctionListingsController < ApplicationController
   end
 
   def auction_listing_params
-    params.require(:auction_listing).permit(:title, :short_description, :long_description, :category, :estimated_value, :starting_bid)
+    params.require(:auction_listing).permit(:title, :short_description, :long_description, :category, :status, :estimated_value, :starting_bid)
   end
 end

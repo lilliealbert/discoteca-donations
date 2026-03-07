@@ -33,6 +33,16 @@
     </div>
   </div>
 
+  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+    <%= form.label :status, class: "text-sm font-medium text-gray-500" %>
+    <div class="mt-1 sm:col-span-2 sm:mt-0">
+      <%= form.select :status,
+          AuctionListing.statuses.keys.map { |s| [s.humanize.titleize, s] },
+          {},
+          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+    </div>
+  </div>
+
   <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
     <%= form.label :short_description, class: "text-sm font-medium text-gray-500" %>
     <div class="mt-1 sm:col-span-2 sm:mt-0">

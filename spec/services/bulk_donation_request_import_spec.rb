@@ -6,8 +6,8 @@ describe BulkDonationRequestImport do
 
   before do
     CSV.open(file.path, 'w') do |csv|
-      csv << ["Name", "Primary Contact", "Email", "Phone", "Website", "Relationship to TECA", "Donor Notes", "Type", "Donation Notes","Volunteer"]
-      csv << ["Acrosports", nil, "info@acrosports.org", nil, nil, nil, nil, "Business/Non-profit", "Acro fun night $50 value",nil]
+      csv << ["Name", "Primary Contact", "Email", "Phone", "Website", "Relationship to TECA", "Donor Notes", "Type", "Donation Notes", "Volunteer"]
+      csv << ["Acrosports", nil, "info@acrosports.org", nil, nil, nil, nil, "Business/Non-profit", "Acro fun night $50 value", nil]
       csv << ["Abada Capoeira", "Tamara McDonald - office manager", "info@abada.org", nil, nil, nil, nil, "staff", "Two sets of 4 classes", "beep@boop.bop"]
       csv << ["Zed (Zombie)", nil, "zed@example.com", nil, nil, nil, nil, "staff", "Two sets of 4 classes", "beep@boop.bop"]
     end

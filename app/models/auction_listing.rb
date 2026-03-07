@@ -16,6 +16,12 @@ class AuctionListing < ApplicationRecord
     live_auction: "live_auction"
   }
 
+  enum :status, {
+    draft: "draft",
+    needs_review: "needs_review",
+    ready_for_export: "ready_for_export"
+  }
+
   validates :title, presence: true
   validates :category, presence: true
   validates :short_description, length: { maximum: 70 }

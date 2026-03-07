@@ -1,5 +1,11 @@
 class DonationsController < ApplicationController
-  before_action :set_donation
+  before_action :set_event, only: [:index]
+  before_action :set_donation, only: [:show, :edit, :update]
+
+  def index
+    @donations = @event.donations.includes(:donor, :volunteer, :auction_listing)
+    authorize Donation
+  end
 
   def show
     authorize @donation
@@ -21,6 +27,10 @@ class DonationsController < ApplicationController
   end
 
   private
+
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
 
   def set_donation
     @donation = Donation.find(params[:id])

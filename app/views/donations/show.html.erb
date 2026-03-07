@@ -150,7 +150,21 @@
               <dt class="text-sm font-medium text-gray-500">Category</dt>
               <dd class="mt-1 sm:col-span-2 sm:mt-0">
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10">
-                  <%= listing.category %>
+                  <%= listing.category.humanize.titleize %>
+                </span>
+              </dd>
+            </div>
+            <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Status</dt>
+              <dd class="mt-1 sm:col-span-2 sm:mt-0">
+                <% status_classes = case listing.status
+                   when 'draft' then 'bg-gray-100 text-gray-700 ring-gray-500/10'
+                   when 'needs_review' then 'bg-yellow-100 text-yellow-800 ring-yellow-600/20'
+                   when 'ready_for_export' then 'bg-green-100 text-green-800 ring-green-600/20'
+                   else 'bg-gray-100 text-gray-700 ring-gray-500/10'
+                   end %>
+                <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+                  <%= listing.status.humanize.titleize %>
                 </span>
               </dd>
             </div>
