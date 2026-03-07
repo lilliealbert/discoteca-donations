@@ -8,4 +8,11 @@ class Volunteer < ApplicationRecord
   has_many :donations, dependent: :destroy
 
   validates :name, presence: true
+
+  def last_activity
+    [
+      donation_requests.maximum(:updated_at),
+      donations.maximum(:updated_at)
+    ].compact.max
+  end
 end

@@ -35,6 +35,17 @@
           <dt class="text-sm font-medium text-gray-500">Member since</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @volunteer.created_at.strftime("%B %d, %Y") %></dd>
         </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Last activity</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            <% if @volunteer.last_activity.present? %>
+              <%= time_ago_in_words(@volunteer.last_activity) %> ago
+              <span class="text-gray-400">(<%= @volunteer.last_activity.strftime("%B %d, %Y at %l:%M %p") %>)</span>
+            <% else %>
+              <span class="text-gray-400">No activity yet</span>
+            <% end %>
+          </dd>
+        </div>
       </dl>
     </details>
 
