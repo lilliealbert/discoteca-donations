@@ -14,7 +14,7 @@ class AuctionListingsController < ApplicationController
     if @auction_listing.save
       redirect_to @donation, notice: "Auction listing created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -28,7 +28,7 @@ class AuctionListingsController < ApplicationController
     if @auction_listing.update(auction_listing_params)
       redirect_to @donation, notice: "Auction listing updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

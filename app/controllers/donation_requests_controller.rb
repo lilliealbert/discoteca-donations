@@ -33,7 +33,7 @@ class DonationRequestsController < ApplicationController
         @donors = Donor.order(:name)
         @events = Event.order(date: :desc)
         @donation_request.errors.add(:base, "Could not create donor: #{donor.errors.full_messages.join(', ')}")
-        return render :new, status: :unprocessable_entity
+        return render :new, status: :unprocessable_content
       end
     end
 
@@ -45,7 +45,7 @@ class DonationRequestsController < ApplicationController
     else
       @donors = Donor.order(:name)
       @events = Event.order(date: :desc)
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -82,9 +82,9 @@ class DonationRequestsController < ApplicationController
       respond_to do |format|
         format.html do
           @volunteers = Volunteer.order(:name)
-          render :edit, status: :unprocessable_entity
+          render :edit, status: :unprocessable_content
         end
-        format.json { render json: { errors: @donation_request.errors }, status: :unprocessable_entity }
+        format.json { render json: { errors: @donation_request.errors }, status: :unprocessable_content }
       end
     end
   end

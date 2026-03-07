@@ -64,7 +64,7 @@ RSpec.describe "DonationRequests", type: :request do
         }.to change(Donor, :count).by(0)
          .and change(DonationRequest, :count).by(0)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns error when donor name already exists" do
@@ -75,7 +75,7 @@ RSpec.describe "DonationRequests", type: :request do
         }.to change(Donor, :count).by(0)
          .and change(DonationRequest, :count).by(0)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

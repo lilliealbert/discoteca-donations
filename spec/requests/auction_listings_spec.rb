@@ -83,7 +83,7 @@ RSpec.describe "AuctionListings", type: :request do
           post donation_auction_listing_path(donation), params: invalid_params
         }.not_to change(AuctionListing, :count)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns error when category is missing" do
@@ -94,7 +94,7 @@ RSpec.describe "AuctionListings", type: :request do
           post donation_auction_listing_path(donation), params: invalid_params
         }.not_to change(AuctionListing, :count)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 
@@ -180,7 +180,7 @@ RSpec.describe "AuctionListings", type: :request do
           auction_listing: { title: "" }
         }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
 
         auction_listing.reload
         expect(auction_listing.title).to eq("Original Title")

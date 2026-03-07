@@ -11,7 +11,6 @@ class BulkDonationRequestImport
 
     contents = CSV.parse(@file.read)
     headers = contents.shift
-    puts "HEY THERE, you're creating #{contents.length} donation requests"
 
     # 0: Name
     # 1: Primary Contact

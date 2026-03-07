@@ -18,7 +18,7 @@ class DonorsController < ApplicationController
     if @donor.update(donor_params)
       redirect_to @donor, notice: "Donor updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
