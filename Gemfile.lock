@@ -77,6 +77,9 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
+    anthropic (1.25.0)
+      cgi
+      connection_pool
     ast (2.4.3)
     async (2.36.0)
       console (~> 1.29)
@@ -99,6 +102,7 @@ GEM
     bundler-audit (0.9.3)
       bundler (>= 1.2.0)
       thor (~> 1.0)
+    cgi (0.5.1)
     claude-code-sdk-ruby (0.1.6)
       async (~> 2)
       logger (~> 1)
@@ -513,6 +517,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  anthropic
   bootsnap
   brakeman
   bundler-audit
@@ -555,6 +560,7 @@ CHECKSUMS
   activestorage (8.1.2) sha256=8a63a48c3999caeee26a59441f813f94681fc35cc41aba7ce1f836add04fba76
   activesupport (8.1.2) sha256=88842578ccd0d40f658289b0e8c842acfe9af751afee2e0744a7873f50b6fdae
   addressable (2.8.9) sha256=cc154fcbe689711808a43601dee7b980238ce54368d23e127421753e46895485
+  anthropic (1.25.0) sha256=263ec37d38e2de51e056eb1ce2e17f80fa6a329865432cc82e1efff25e71d17b
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   async (2.36.0) sha256=090623f4c65706664355c9efa6c7bfb86771a513e65cd681c51cb27747530550
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
@@ -568,6 +574,7 @@ CHECKSUMS
   brakeman (8.0.4) sha256=7bf921fa9638544835df9aa7b3e720a9a72c0267f34f92135955edd80d4dcf6f
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
+  cgi (0.5.1) sha256=e93fcafc69b8a934fe1e6146121fa35430efa8b4a4047c4893764067036f18e9
   claude-code-sdk-ruby (0.1.6) sha256=c68e20f06a7d29d6db27135336b09e74baf125160ffc9d01d7eb9d46ecaa0003
   claude-on-rails (0.1.3) sha256=733030542f9ad083a4a3c2b540799d1c4ddd9d62cc40d3558b96afdb8549d1e4
   claude_swarm (0.3.11) sha256=14320d34e3e66cc1cf7db98214f33bda41fdba4f5dbaaa68fce54509cc331609

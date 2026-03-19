@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import SortableTableController from "./sortable_table_controller"
 application.register("sortable-table", SortableTableController)
+
+import ListingGeneratorController from "./listing_generator_controller"
+application.register("listing-generator", ListingGeneratorController)

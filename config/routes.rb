@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   resources :donations, only: [:show, :edit, :update] do
     resource :auction_listing, only: [:new, :create, :edit, :update, :destroy]
+    resource :auction_listing_generation, only: [:create]
   end
   resources :bulk_imports, only: [:new, :create]
   resources :templates, only: [:index]

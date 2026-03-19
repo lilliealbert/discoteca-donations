@@ -1,99 +1,126 @@
-<%= form_with model: @auction_listing, url: donation_auction_listing_path(@donation), class: "divide-y divide-gray-100" do |form| %>
-  <% if @auction_listing.errors.any? %>
-    <div class="px-6 py-5">
-      <div class="rounded-lg bg-red-50 p-4 border border-red-200">
-        <h3 class="text-sm font-medium text-red-800">
-          <%= pluralize(@auction_listing.errors.count, "error") %> prohibited this auction listing from being saved:
-        </h3>
-        <ul class="mt-2 list-disc list-inside text-sm text-red-700">
-          <% @auction_listing.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+<div data-controller="listing-generator"
+     data-listing-generator-url-value="<%= donation_auction_listing_generation_path(@donation) %>"
+     data-listing-generator-auto-generate-value="<%= local_assigns[:auto_generate] != false %>">
+
+  <!-- Error message for generation failures -->
+  <div data-listing-generator-target="error" class="hidden mx-6 mt-6 rounded-lg bg-yellow-50 p-4 border border-yellow-200">
+    <p class="text-sm text-yellow-800"></p>
+  </div>
+
+  <%= form_with model: @auction_listing, url: donation_auction_listing_path(@donation), class: "divide-y divide-gray-100" do |form| %>
+    <% if @auction_listing.errors.any? %>
+      <div class="px-6 py-5">
+        <div class="rounded-lg bg-red-50 p-4 border border-red-200">
+          <h3 class="text-sm font-medium text-red-800">
+            <%= pluralize(@auction_listing.errors.count, "error") %> prohibited this auction listing from being saved:
+          </h3>
+          <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+            <% @auction_listing.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+      <%= form.label :title, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0 relative">
+        <%= form.text_field :title,
+            data: { listing_generator_target: "title" },
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+            placeholder: "Title for the auction website" %>
+        <div data-listing-generator-target="loading" class="hidden absolute inset-0 bg-gray-50 rounded-lg animate-pulse"></div>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+      <%= form.label :category, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0">
+        <%= form.select :category,
+            AuctionListing.categories.keys.map { |c| [c.humanize.titleize, c] },
+            { prompt: "Select a category" },
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+      <%= form.label :status, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0">
+        <%= form.select :status,
+            AuctionListing.statuses.keys.map { |s| [s.humanize.titleize, s] },
+            {},
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+      <%= form.label :short_description, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0 relative">
+        <%= form.text_area :short_description,
+            data: { listing_generator_target: "shortDescription" },
+            rows: 2,
+            maxlength: 70,
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+            placeholder: "Brief description for listing previews (70 chars max)" %>
+        <div data-listing-generator-target="loading" class="hidden absolute inset-0 bg-gray-50 rounded-lg animate-pulse"></div>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+      <%= form.label :long_description, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0 relative">
+        <%= form.text_area :long_description,
+            data: { listing_generator_target: "longDescription" },
+            rows: 12,
+            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+            placeholder: "Full description for the auction page" %>
+        <div data-listing-generator-target="loading" class="hidden absolute inset-0 bg-gray-50 rounded-lg animate-pulse"></div>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+      <%= form.label :estimated_value, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0">
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-gray-500">$</span>
+          <%= form.number_field :estimated_value,
+              step: 0.01,
+              min: 0,
+              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+              placeholder: "0.00" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+      <%= form.label :starting_bid, class: "text-sm font-medium text-gray-500" %>
+      <div class="mt-1 sm:col-span-2 sm:mt-0">
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-gray-500">$</span>
+          <%= form.number_field :starting_bid,
+              step: 0.01,
+              min: 0,
+              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+              placeholder: "0.00" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-6 py-5 flex items-center justify-between">
+      <button type="button"
+              data-listing-generator-target="generateButton"
+              data-action="click->listing-generator#generate"
+              class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors">
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+        </svg>
+        Regenerate
+      </button>
+      <div class="flex items-center gap-3">
+        <%= link_to "Cancel", @donation, class: "rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" %>
+        <%= form.submit class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
       </div>
     </div>
   <% end %>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-    <%= form.label :title, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <%= form.text_field :title,
-          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-          placeholder: "Title for the auction website" %>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-    <%= form.label :category, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <%= form.select :category,
-          AuctionListing.categories.keys.map { |c| [c.humanize.titleize, c] },
-          { prompt: "Select a category" },
-          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-    <%= form.label :status, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <%= form.select :status,
-          AuctionListing.statuses.keys.map { |s| [s.humanize.titleize, s] },
-          {},
-          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-    <%= form.label :short_description, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <%= form.text_area :short_description,
-          rows: 2,
-          maxlength: 70,
-          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-          placeholder: "Brief description for listing previews (70 chars max)" %>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-    <%= form.label :long_description, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <%= form.text_area :long_description,
-          rows: 12,
-          class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-          placeholder: "Full description for the auction page" %>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-    <%= form.label :estimated_value, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <div class="flex items-center gap-2">
-        <span class="text-sm text-gray-500">$</span>
-        <%= form.number_field :estimated_value,
-            step: 0.01,
-            min: 0,
-            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-            placeholder: "0.00" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
-    <%= form.label :starting_bid, class: "text-sm font-medium text-gray-500" %>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
-      <div class="flex items-center gap-2">
-        <span class="text-sm text-gray-500">$</span>
-        <%= form.number_field :starting_bid,
-            step: 0.01,
-            min: 0,
-            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
-            placeholder: "0.00" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="px-6 py-5 flex items-center justify-end gap-3">
-    <%= link_to "Cancel", @donation, class: "rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" %>
-    <%= form.submit class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer" %>
-  </div>
-<% end %>
+</div>
