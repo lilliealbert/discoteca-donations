@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :volunteers, controllers: { registrations: "volunteers/registrations" }
   resources :events, only: [:index, :show] do
     resources :donations, only: [:index]
+    get "auction_listings/export", to: "auction_listings#export", as: :export_auction_listings
   end
   resources :donors, only: [:index, :show, :edit, :update]
   resources :volunteers, only: [:index, :show]

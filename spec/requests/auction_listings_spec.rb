@@ -240,4 +240,90 @@ RSpec.describe "AuctionListings", type: :request do
       end
     end
   end
+
+  describe "GET /events/:event_id/auction_listings/export" do
+    let!(:ready_listing) do
+      AuctionListing.create!(
+        donation: donation,
+        title: "Dinner at Fish Stew Pizza",
+        category: "experiences",
+        short_description: "Dinner for 4 with the Pizza family",
+        long_description: "Enjoy a magical evening at Beach City's finest pizzeria, hosted by Kofi, Nanefua, Jenny, and Kiki Pizza. Includes all-you-can-eat pizza and a personal serenade from Steven Universe himself.",
+        estimated_value: 100.00,
+        starting_bid: 50.00,
+        status: :ready_for_export
+      )
+    end
+
+    let!(:draft_listing) do
+      other_donation = Donation.create!(
+        donor: donor,
+        event: event,
+        volunteer: volunteer,
+        donation_type: :physical,
+        short_description: "Rose's sword"
+      )
+      AuctionListing.create!(
+        donation: other_donation,
+        title: "Training Session at the Sky Arena",
+        category: "sports",
+        status: :draft
+      )
+    end
+
+    context "as a signed-in volunteer" do
+      before { sign_in volunteer, scope: :volunteer }
+
+      it "exports only ready_for_export listings as CSV" do
+        get event_export_auction_listings_path(event)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to include("text/csv")
+        expect(response.headers["Content-Disposition"]).to include("auction_listings_")
+        expect(response.headers["Content-Disposition"]).to include(".csv")
+
+        csv = CSV.parse(response.body, headers: true)
+        expect(csv.length).to eq(1)
+
+        row = csv.first
+        expect(row["title"]).to eq("Dinner at Fish Stew Pizza")
+        expect(row["display section"]).to eq("experiences")
+        expect(row["estimated value"]).to eq("100.0")
+        expect(row["starting bid"]).to eq("50.0")
+        expect(row["short description"]).to eq("Dinner for 4 with the Pizza family")
+        expect(row["long description"]).to include("Beach City's finest pizzeria")
+      end
+
+      it "excludes listings from other events" do
+        other_event = Event.create!(name: "Era 3 Homeworld Gala", date: Date.tomorrow)
+        other_donation = Donation.create!(
+          donor: donor,
+          event: other_event,
+          volunteer: volunteer,
+          donation_type: :physical,
+          short_description: "Diamond essence spa treatment"
+        )
+        AuctionListing.create!(
+          donation: other_donation,
+          title: "Tour of the Diamond Palace",
+          category: "food",
+          status: :ready_for_export
+        )
+
+        get event_export_auction_listings_path(event)
+
+        csv = CSV.parse(response.body, headers: true)
+        expect(csv.length).to eq(1)
+        expect(csv.first["title"]).to eq("Dinner at Fish Stew Pizza")
+      end
+    end
+
+    context "as an unauthenticated user" do
+      it "redirects to sign in" do
+        get event_export_auction_listings_path(event)
+
+        expect(response).to redirect_to(new_volunteer_session_path)
+      end
+    end
+  end
 end
