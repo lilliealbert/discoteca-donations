@@ -24,7 +24,7 @@ class AuctionListing < ApplicationRecord
 
   validates :title, presence: true
   validates :category, presence: true
-  validates :short_description, length: { maximum: 70 }
+  validates :short_description, length: { maximum: 70 }, presence: true, if: :ready_for_export?
   validates :estimated_value, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :starting_bid, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :starting_bid, numericality: { greater_than_or_equal_to: 0 }, presence: true, if: :ready_for_export?
 end
