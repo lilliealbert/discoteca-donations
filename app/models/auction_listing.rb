@@ -19,7 +19,8 @@ class AuctionListing < ApplicationRecord
   enum :status, {
     draft: "draft",
     needs_review: "needs_review",
-    ready_for_export: "ready_for_export"
+    ready_for_export: "ready_for_export",
+    exported: "exported"
   }
 
   validates :title, presence: true

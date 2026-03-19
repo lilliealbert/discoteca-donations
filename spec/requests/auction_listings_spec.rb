@@ -307,6 +307,8 @@ RSpec.describe "AuctionListings", type: :request do
           donation: other_donation,
           title: "Tour of the Diamond Palace",
           category: "food",
+          short_description: "See where the Diamonds live!",
+          starting_bid: 500.00,
           status: :ready_for_export
         )
 
@@ -315,6 +317,15 @@ RSpec.describe "AuctionListings", type: :request do
         csv = CSV.parse(response.body, headers: true)
         expect(csv.length).to eq(1)
         expect(csv.first["title"]).to eq("Dinner at Fish Stew Pizza")
+      end
+
+      it "marks exported listings as exported" do
+        expect(ready_listing.status).to eq("ready_for_export")
+
+        get event_export_auction_listings_path(event)
+
+        ready_listing.reload
+        expect(ready_listing.status).to eq("exported")
       end
     end
 

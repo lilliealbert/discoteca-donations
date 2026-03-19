@@ -8,15 +8,17 @@ class AuctionListingsController < ApplicationController
     @event = Event.find(params[:event_id])
     authorize Donation, :index?
 
-    listings = AuctionListing.joins(:donation)
-                             .where(donations: { event_id: @event.id })
-                             .where(status: :ready_for_export)
-                             .includes(:donation)
+    listing_ids = AuctionListing.joins(:donation)
+                                .where(donations: { event_id: @event.id })
+                                .where(status: :ready_for_export)
+                                .pluck(:id)
+
+    listings = AuctionListing.where(id: listing_ids).includes(:donation).to_a
 
     csv_data = CSV.generate(headers: true) do |csv|
       csv << ["title", "display section", "estimated value", "starting bid", "short description", "long description"]
 
-      listings.find_each do |listing|
+      listings.each do |listing|
         csv << [
           listing.title,
           listing.category,
@@ -27,6 +29,8 @@ class AuctionListingsController < ApplicationController
         ]
       end
     end
+
+    AuctionListing.where(id: listing_ids).update_all(status: "exported") if listing_ids.any?
 
     send_data csv_data,
               filename: "auction_listings_#{@event.name.parameterize}_#{Date.current}.csv",
