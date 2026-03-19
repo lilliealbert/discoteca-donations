@@ -40,7 +40,7 @@
         <%= form.select :category,
             AuctionListing.categories.keys.map { |c| [c.humanize.titleize, c] },
             { prompt: "Select a category" },
-            class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" %>
+            { data: { listing_generator_target: "category" }, class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" } %>
       </div>
     </div>
 

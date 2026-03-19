@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["title", "shortDescription", "longDescription", "loading", "error", "generateButton"]
+  static targets = ["title", "shortDescription", "longDescription", "category", "loading", "error", "generateButton"]
   static values = {
     url: String,
     autoGenerate: { type: Boolean, default: true }
@@ -53,6 +53,7 @@ export default class extends Controller {
     if (data.title) this.titleTarget.value = data.title
     if (data.short_description) this.shortDescriptionTarget.value = data.short_description
     if (data.long_description) this.longDescriptionTarget.value = data.long_description
+    if (data.category && this.hasCategoryTarget) this.categoryTarget.value = data.category
   }
 
   showLoading() {

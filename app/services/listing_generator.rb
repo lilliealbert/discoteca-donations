@@ -87,6 +87,7 @@ class ListingGenerator
       - title: A compelling title (5-10 words in each language)
       - short_description: A supporting detail (MAXIMUM 70 characters)
       - long_description: Full details (2-4 sentences in each language)
+      - category: One of these exact values: #{AuctionListing.categories.keys.join(", ")}
 
       Return ONLY valid JSON, no other text.
     PROMPT
