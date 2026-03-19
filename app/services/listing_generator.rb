@@ -10,13 +10,17 @@ class ListingGenerator
     - Highlight unique value and experiences
     - Use active voice
     - For short_description: MUST be 70 characters or less, highlight one supporting detail not obvious from the title (it's a subheader). Start with English version, then a separator character, then the Spanish version 
-    - For long_description: 2-4 sentences, include all relevant details + fine print. After the paragraph selling the item, include the fine print in bullet-point format after "Fine print:\n". Format with a blank line, then "--", then another blank line between languages, like this:
+    - For long_description: 2-4 sentences, include all relevant details + fine print. After the paragraph selling the item (which should end with the organization's website), include the fine print in bullet-point format after "Fine print:\n". Format with a blank line, then "--", then another blank line between languages, like this:
 
       English description here.
+      
+      Learn more at: organization URL
       
       --
 
       Spanish description here.
+      
+      Más información en: URL
 
       --      
       
@@ -43,7 +47,7 @@ class ListingGenerator
   def generate
     response = client.messages.create(
       model: "claude-sonnet-4-20250514",
-      max_tokens: 500,
+      max_tokens: 1500,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: build_user_prompt }]
     )
