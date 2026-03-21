@@ -85,6 +85,10 @@
           </dd>
         </div>
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Quantity</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.quantity.presence || 1 %></dd>
+        </div>
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">Short description</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @donation.short_description.presence || "No description" %></dd>
         </div>

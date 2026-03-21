@@ -37,6 +37,6 @@ class DonationsController < ApplicationController
   end
 
   def donation_params
-    params.require(:donation).permit(:donation_type, :in_hand, :short_description, :notes, :fine_print)
+    params.require(:donation).permit(:donation_type, :in_hand, :short_description, :notes, :fine_print, :quantity)
   end
 end

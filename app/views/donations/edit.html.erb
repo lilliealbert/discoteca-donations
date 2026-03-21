@@ -67,6 +67,16 @@
           </div>
         </div>
 
+        <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center">
+          <%= form.label :quantity, class: "text-sm font-medium text-gray-500" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= form.number_field :quantity,
+                min: 1,
+                class: "block w-24 rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm",
+                placeholder: "1" %>
+          </div>
+        </div>
+
         <div class="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
           <%= form.label :notes, class: "text-sm font-medium text-gray-500" %>
           <div class="mt-1 sm:col-span-2 sm:mt-0">
