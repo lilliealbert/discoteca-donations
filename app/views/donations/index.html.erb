@@ -142,7 +142,7 @@
                        when 'ready_for_export' then 'bg-green-100 text-green-800 ring-green-600/20'
                        else 'bg-gray-100 text-gray-700 ring-gray-500/10'
                        end %>
-                    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
+                    <span class="inline-flex items-center whitespace-nowrap rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset <%= status_classes %>">
                       <%= donation.auction_listing.status.humanize.titleize %>
                     </span>
                   <% else %>
