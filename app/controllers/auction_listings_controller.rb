@@ -19,14 +19,24 @@ class AuctionListingsController < ApplicationController
       csv << ["title", "display section", "estimated value", "starting bid", "short description", "long description"]
 
       listings.each do |listing|
-        csv << [
-          listing.title,
-          listing.category,
-          listing.estimated_value,
-          listing.starting_bid,
-          listing.short_description,
-          listing.long_description
-        ]
+        quantity = listing.donation.quantity || 1
+
+        quantity.times do |i|
+          title = if quantity > 1
+                    "(#{i + 1}/#{quantity}) #{listing.title}"
+                  else
+                    listing.title
+                  end
+
+          csv << [
+            title,
+            listing.category,
+            listing.estimated_value,
+            listing.starting_bid,
+            listing.short_description,
+            listing.long_description
+          ]
+        end
       end
     end
 

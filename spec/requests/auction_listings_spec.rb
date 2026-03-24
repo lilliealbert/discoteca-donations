@@ -294,6 +294,26 @@ RSpec.describe "AuctionListings", type: :request do
         expect(row["long description"]).to include("Beach City's finest pizzeria")
       end
 
+      it "duplicates rows for donations with quantity > 1 and adds demarcation to titles" do
+        donation.update!(quantity: 3)
+
+        get event_export_auction_listings_path(event)
+
+        csv = CSV.parse(response.body, headers: true)
+        expect(csv.length).to eq(3)
+
+        expect(csv[0]["title"]).to eq("(1/3) Dinner at Fish Stew Pizza")
+        expect(csv[1]["title"]).to eq("(2/3) Dinner at Fish Stew Pizza")
+        expect(csv[2]["title"]).to eq("(3/3) Dinner at Fish Stew Pizza")
+
+        # All rows should have the same other values
+        csv.each do |row|
+          expect(row["display section"]).to eq("experiences")
+          expect(row["estimated value"]).to eq("100.0")
+          expect(row["starting bid"]).to eq("50.0")
+        end
+      end
+
       it "excludes listings from other events" do
         other_event = Event.create!(name: "Era 3 Homeworld Gala", date: Date.tomorrow)
         other_donation = Donation.create!(
