@@ -40,10 +40,13 @@ class AuctionListingsController < ApplicationController
       end
     end
 
-    AuctionListing.where(id: listing_ids).update_all(status: "exported") if listing_ids.any?
+    unless params[:preview]
+      AuctionListing.where(id: listing_ids).update_all(status: "exported") if listing_ids.any?
+    end
 
+    filename_suffix = params[:preview] ? "_preview" : ""
     send_data csv_data,
-              filename: "auction_listings_#{@event.name.parameterize}_#{Date.current}.csv",
+              filename: "auction_listings_#{@event.name.parameterize}_#{Date.current}#{filename_suffix}.csv",
               type: "text/csv"
   end
 

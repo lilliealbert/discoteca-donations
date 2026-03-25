@@ -347,6 +347,18 @@ RSpec.describe "AuctionListings", type: :request do
         ready_listing.reload
         expect(ready_listing.status).to eq("exported")
       end
+
+      it "does not mark listings as exported when preview param is true" do
+        expect(ready_listing.status).to eq("ready_for_export")
+
+        get event_export_auction_listings_path(event, preview: true)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.headers["Content-Disposition"]).to include("_preview.csv")
+
+        ready_listing.reload
+        expect(ready_listing.status).to eq("ready_for_export")
+      end
     end
 
     context "as an unauthenticated user" do
