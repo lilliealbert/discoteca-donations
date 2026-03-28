@@ -39,7 +39,7 @@
       <table class="min-w-full" data-controller="sortable-table">
         <thead class="sticky top-0 z-10">
           <tr class="border-b border-gray-200 bg-gray-50">
-            <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="py-4 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="description" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Description
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -47,7 +47,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="donor" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Donor
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -55,7 +55,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="donor_type" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Donor Type
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -63,7 +63,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="volunteer" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Volunteer
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -71,7 +71,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="type" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Type
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -79,7 +79,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="in_hand" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 In Hand
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -87,7 +87,7 @@
                 </svg>
               </span>
             </th>
-            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-action="click->sortable-table#sort">
+            <th scope="col" class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 cursor-pointer select-none group/header" data-sortable-table-target="header" data-column-key="auction_listing" data-action="click->sortable-table#sort">
               <span class="inline-flex items-center">
                 Auction Listing
                 <svg data-sort-icon class="ml-1 h-4 w-4 text-gray-400 opacity-0 group-hover/header:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

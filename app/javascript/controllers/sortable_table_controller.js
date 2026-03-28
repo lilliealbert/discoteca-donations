@@ -2,13 +2,50 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["header", "body"]
+  static values = { storageKey: { type: String, default: "" } }
+
+  connect() {
+    // Defer until after Stimulus has fully connected all targets
+    requestAnimationFrame(() => this.restoreSortState())
+  }
+
+  get storageKeyName() {
+    return this.storageKeyValue || `sortable-table:${window.location.pathname}`
+  }
+
+  restoreSortState() {
+    if (!this.hasBodyTarget) return
+
+    const saved = localStorage.getItem(this.storageKeyName)
+    if (!saved) return
+
+    try {
+      const { columnKey, direction } = JSON.parse(saved)
+      const header = this.headerTargets.find(h => h.dataset.columnKey === columnKey)
+      if (header && direction) {
+        this.applySort(header, direction)
+      }
+    } catch (e) {
+      // Invalid saved state, ignore
+    }
+  }
+
+  saveSortState(columnKey, direction) {
+    localStorage.setItem(this.storageKeyName, JSON.stringify({ columnKey, direction }))
+  }
 
   sort(event) {
     const header = event.currentTarget
-    const columnIndex = Array.from(header.parentElement.children).indexOf(header)
+    const columnKey = header.dataset.columnKey
     const currentDirection = header.dataset.sortDirection || "none"
     const newDirection = currentDirection === "asc" ? "desc" : "asc"
 
+    this.applySort(header, newDirection)
+    this.saveSortState(columnKey, newDirection)
+  }
+
+  applySort(header, direction) {
+    const columnIndex = Array.from(header.parentElement.children).indexOf(header)
     // Reset all headers
     this.headerTargets.forEach(h => {
       h.dataset.sortDirection = "none"
@@ -17,11 +54,11 @@ export default class extends Controller {
     })
 
     // Set current header
-    header.dataset.sortDirection = newDirection
+    header.dataset.sortDirection = direction
     const icon = header.querySelector("[data-sort-icon]")
     if (icon) {
       icon.setAttribute("class", "ml-1 h-4 w-4 text-gray-600")
-      icon.innerHTML = newDirection === "asc"
+      icon.innerHTML = direction === "asc"
         ? '<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />'
         : '<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />'
     }
@@ -44,7 +81,7 @@ export default class extends Controller {
       const bNum = parseFloat(bValue.replace(/[^0-9.-]/g, ""))
 
       if (!isNaN(aNum) && !isNaN(bNum)) {
-        return newDirection === "asc" ? aNum - bNum : bNum - aNum
+        return direction === "asc" ? aNum - bNum : bNum - aNum
       }
 
       // Try to parse as dates
@@ -52,11 +89,11 @@ export default class extends Controller {
       const bDate = Date.parse(bValue)
 
       if (!isNaN(aDate) && !isNaN(bDate)) {
-        return newDirection === "asc" ? aDate - bDate : bDate - aDate
+        return direction === "asc" ? aDate - bDate : bDate - aDate
       }
 
       // String comparison
-      return newDirection === "asc"
+      return direction === "asc"
         ? aValue.localeCompare(bValue)
         : bValue.localeCompare(aValue)
     })
