@@ -57,6 +57,7 @@ class EventsController < ApplicationController
     csv_data = CSV.generate(headers: true) do |csv|
       csv << [
         "Donor Name", "Donor Type", "Donor Email", "Donor Phone",
+        "Primary Contact", "Relationship to TECA",
         "Volunteer Name", "Volunteer Email",
         "Donation Type", "Short Description", "Quantity", "In Hand",
         "Notes", "Fine Print",
@@ -69,6 +70,8 @@ class EventsController < ApplicationController
           donation.donor.donor_type&.humanize,
           donation.donor.email_address,
           donation.donor.phone_number,
+          donation.donor.primary_contact,
+          donation.donor.relationship_to_teca,
           donation.volunteer.name,
           donation.volunteer.email,
           donation.donation_type&.humanize,
