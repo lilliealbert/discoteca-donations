@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show] do
     resources :donations, only: [:index]
     get "auction_listings/export", to: "auction_listings#export", as: :export_auction_listings
+    get "export_donation_requests", to: "events#export_donation_requests", as: :export_donation_requests
+    get "export_donations", to: "events#export_donations", as: :export_donations
   end
   resources :donors, only: [:index, :show, :edit, :update]
   resources :volunteers, only: [:index, :show]
